@@ -1,13 +1,14 @@
 import discord, os, asyncio, random, datetime
-import requests, bs4
+import requests, bs4, json
 from bs4 import BeautifulSoup
 from time import sleep
 from discord.ext import commands
-from key import DISCORD_API_TOKEN
+
 
 intents = discord.Intents.default()
 intents.message_content = True 
 client = commands.Bot(command_prefix="!", intents=discord.Intents.all())
+
 
 @client.event
 async def on_ready():
@@ -49,7 +50,9 @@ async def load():
 async def main():
     async with client:
         await load()
-        await client.start(DISCORD_API_TOKEN)
+        with open("./key.json", "r") as f:
+            data = json.load(f)  
+        await client.start(data["DISCORD_API_TOKEN"])
 
 
 asyncio.run(main()) 
