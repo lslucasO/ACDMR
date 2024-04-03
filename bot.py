@@ -41,16 +41,16 @@ async def produto(ctx, message):
     
     
 async def load():   
-    for filename in os.listdir('./commands'):
+    for filename in os.listdir('./cogs'):
         if filename.endswith('.py'):
-            await client.load_extension(f'commands.{filename[:-3]}')
+            await client.load_extension(f'cogs.{filename[:-3]}')
             print(f'{filename} is ready!')
 
 
 async def main():
     async with client:
         await load()
-        with open("./key.json", "r") as f:
+        with open("./database.json", "r") as f:
             data = json.load(f)  
         await client.start(data["DISCORD_API_TOKEN"])
 
