@@ -50,7 +50,7 @@ async def load():
 async def main():
     async with client:
         await load()
-        with open("./database.json", "r") as f:
+        with open("./key.json", "r") as f:
             data = json.load(f)  
         await client.start(data["DISCORD_API_TOKEN"])
 
