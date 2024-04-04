@@ -1,5 +1,5 @@
 import discord
-from utils.functions import createEmbed 
+from utils.functions import createEmbed, getProduct
 from discord.ext import commands
 from discord import app_commands
 
@@ -8,6 +8,24 @@ class Buttons(discord.ui.View):
     @discord.ui.button(label="Cadastrar",style=discord.ButtonStyle.green)
     async def cadastrar(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.defer(ephemeral=True)
+        
+        self.message_product = await interaction.channel.send("Digite quantos produtos você deseja adicionar")
+        self.quantity_product = await interaction.client.wait_for("message")
+        self.url_list = []
+        
+        for self.index in range(int(self.quantity_product.content)):
+            await interaction.followup.send(f"Manda o {self.index+1}* link")
+            self.await_product = await interaction.client.wait_for("message")
+            self.url = self.await_product.content
+            
+            self.product = getProduct(self.url)
+            embed = createEmbed(embed_title=f"{self.product[0]}", embed_field_name_list=[f"Preço:", f"Estoque:"], embed_field_value_list=[f"{self.product[2]} Unidades", f"R${self.product[1]}"], number_of_fields=2)
+            
+            await interaction.followup.send(embed=embed)
+        
+        
+        
+        
         await interaction.followup.send("funciona")
                 
 
