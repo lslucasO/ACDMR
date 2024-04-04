@@ -21,9 +21,11 @@ def getProduct(url):
     product = doc.find("h1", class_="nome-produto titulo cor-secundaria").string
     price = doc.find("strong", class_="preco-promocional cor-principal titulo")
     stock = doc.find("b", class_="qtde_estoque").string
-    product_information = [product, price["data-sell-price"], stock]
+    image = doc.find("img", id="imagemProduto")
+    product_information = [product, price["data-sell-price"], stock, image["src"]]
     
     return product_information
     
-    
-    
+
+def getStock():
+    ...
