@@ -19,8 +19,9 @@ def createProductEmbed(embed_title, embed_field_name_list, embed_field_value_lis
     embed.set_thumbnail(url=embed_image_url)
     embed.add_field(name=f"{embed_field_name_list[0]}", value="",inline=False)
     
-    for field in range(number_of_value_fields):  
-        embed.add_field(name=f"{field+1}. **{embed_field_value_list[field]['product']}**", value=f"Estoque: **{embed_field_value_list[field]['stock']}** Unidades", inline=False)
+    for field in range(number_of_value_fields): 
+        if int(embed_field_value_list[field]["stock"]) <= 50:   
+            embed.add_field(name=f"{field+1}. **{embed_field_value_list[field]['product']}**", value=f"Estoque: **{embed_field_value_list[field]['stock']}** Unidades ⚠️", inline=False)
         
     return embed
 
@@ -53,7 +54,7 @@ def getProduct(url):
             if database["product"] in produto["product"]:
                 pass
             else:
-                print("novo")
+         
                 listData.append(produto)
 
         listData.append(database.copy())
@@ -78,4 +79,3 @@ def getStock():
             
     return listProducts
     
-getStock()

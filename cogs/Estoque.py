@@ -39,6 +39,9 @@ class Buttons(discord.ui.View):
     @discord.ui.button(label="Remover",style=discord.ButtonStyle.red)
     async def remover(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.defer(ephemeral=True)
+        
+        
+        
         await interaction.followup.send("funciona")
                     
             
@@ -61,7 +64,7 @@ class Estoque(commands.Cog):
         
         
         
-        embed = createProductEmbed(embed_title="Seu Estoque", embed_image_url=embed_image_url, embed_field_name_list=[f"Você tem **{len(listProducts)}** produtos cadastrados"], embed_field_value_list=listProducts, number_of_value_fields=len(listProducts))
+        embed = createProductEmbed(embed_title="Seu Estoque", embed_image_url=embed_image_url, embed_field_name_list=[f"Você tem **{len(listProducts)}** produtos cadastrados, mas apenas esses estão com pouco estoque."], embed_field_value_list=listProducts, number_of_value_fields=len(listProducts))
         
         self.view = Buttons(timeout=None)
         
