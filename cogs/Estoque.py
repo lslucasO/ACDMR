@@ -1,5 +1,5 @@
 import discord
-from utils.functions import createEmbed, getProduct
+from utils.functions import createEmbed, createProductEmbed, getProduct, getStock
 from discord.ext import commands
 from discord import app_commands
 
@@ -27,7 +27,9 @@ class Buttons(discord.ui.View):
         
         embed_image_url = "https://cdn.discordapp.com/attachments/842737517228982272/1224822590061674546/20-01.png?ex=661ee3ed&is=660c6eed&hm=af4b36c7e87cac7b9f359fd8a65feaa8242f04f055ddeb30ad06261c49a3b178&"
         
-        embed = createEmbed(embed_title="Seu Estoque", embed_image_url=embed_image_url, embed_field_name_list=["Produtos"], embed_field_value_list=[f"Teste"], number_of_fields=1)
+        listProducts = getStock()
+
+        embed = createProductEmbed(embed_title="Seu Estoque", embed_image_url=embed_image_url, embed_field_name_list=[f"Você tem **{len(listProducts)}** produtos cadastrados"], embed_field_value_list=listProducts, number_of_value_fields=len(listProducts))
         self.view = Buttons(timeout=None)
         
         await interaction.followup.send(embed=embed, view=self.view)
@@ -55,8 +57,11 @@ class Estoque(commands.Cog):
         
         await interaction.response.defer(ephemeral=False)
         embed_image_url = "https://cdn.discordapp.com/attachments/842737517228982272/1224822590061674546/20-01.png?ex=661ee3ed&is=660c6eed&hm=af4b36c7e87cac7b9f359fd8a65feaa8242f04f055ddeb30ad06261c49a3b178&"
+        listProducts = getStock()
         
-        embed = createEmbed(embed_title="Seu Estoque", embed_image_url=embed_image_url, embed_field_name_list=["Produtos"], embed_field_value_list=["Teste"], number_of_fields=1)
+        
+        
+        embed = createProductEmbed(embed_title="Seu Estoque", embed_image_url=embed_image_url, embed_field_name_list=[f"Você tem **{len(listProducts)}** produtos cadastrados"], embed_field_value_list=listProducts, number_of_value_fields=len(listProducts))
         
         self.view = Buttons(timeout=None)
         

@@ -11,6 +11,17 @@ def createEmbed(embed_title, embed_field_name_list, embed_field_value_list, numb
     for field in range(number_of_fields):   
         embed.add_field(name=f"{embed_field_name_list[field]}", value=f"{embed_field_value_list[field]}", inline=False)
 
+    return embed  
+
+
+def createProductEmbed(embed_title, embed_field_name_list, embed_field_value_list, number_of_value_fields, embed_image_url=None):
+    embed = discord.Embed(title=f"{embed_title}", color=discord.Color.blurple())
+    embed.set_thumbnail(url=embed_image_url)
+    embed.add_field(name=f"{embed_field_name_list[0]}", value="",inline=False)
+    
+    for field in range(number_of_value_fields):  
+        embed.add_field(name=f"{field+1}. **{embed_field_value_list[field]['product']}**", value=f"Estoque: **{embed_field_value_list[field]['stock']}** Unidades", inline=False)
+        
     return embed
 
 
@@ -35,12 +46,10 @@ def getProduct(url):
     database["stock"] = stock.string
     database["image"] = image["src"]
 
-
     with open("database.json", "r") as f:
         data = json.load(f)  
-        print(data)
+        
         for produto in data:
-            print('oi')
             if database["product"] in produto["product"]:
                 pass
             else:
@@ -55,8 +64,18 @@ def getProduct(url):
     return product_information
 
 
-print(getProduct("https://www.gruposhopmix.com/moedor-de-carne-frango-profissional-eletrica-maquina-de-moer"))
+#print(getProduct("https://www.gruposhopmix.com/moedor-de-carne-frango-profissional-eletrica-maquina-de-moer"))
 
 
 def getStock():
-    ...
+    listProducts = []
+    
+    with open("database.json", "r") as f:
+        data = json.load(f)  
+        
+        for produto in data:
+            listProducts.append(produto)
+            
+    return listProducts
+    
+getStock()

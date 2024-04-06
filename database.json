@@ -1,23 +1,44 @@
 [
    {
-      "product": "Moedor de Carne Frango Profissional Eletrica Maquina De Moer",
-      "code": "STO632",
-      "price": "R$ 369,90",
-      "stock": "1000",
-      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/260968846957e27c168.jpg"
+      "product": "Mini Ventilador Usb Port\u00e1til De Mesa Silencioso Articul\u00e1vel",
+      "code": "STO427",
+      "price": "R$ 29,90",
+      "stock": "999",
+      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/146197159/ce183421d2.jpg"
    },
    {
-      "product": "Fita Fecho Adesivo 25mm X 2 Metros Macho E F\u00eamea Forte",
-      "code": "STO2100",
-      "price": "R$ 14,90",
-      "stock": "1000",
-      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/2592995798737265282.jpg"
+      "product": "Rolo Bobina Saco Embalagem Seladora A Vacuo Ranhuras 15 CM",
+      "code": "STO445CM15",
+      "price": "R$ 23,90",
+      "stock": "1008",
+      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/132968583483cc71e93.jpg"
    },
    {
-      "product": "CDSP - Mini Juicer Port\u00e1til com Al\u00e7a Liquidificador 400 ML Branco",
-      "code": "SP9061",
-      "price": "R$ 46,94",
-      "stock": "281",
-      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/220623875/187e6ee603c14b8e-tsd6pt85lw.jpeg"
+      "product": "Camisa De Algod\u00e3o Parceiro GrupoShopMix Azul Logo Dourada",
+      "code": "STO1521",
+      "price": "R$ 39,90",
+      "stock": "1001",
+      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/188432022/05b9f90b67.jpg"
+   },
+   {
+      "product": "Garrafa T\u00e9rmica Com Copo Parede Dupla Inox 500ml",
+      "code": "STO1694",
+      "price": "R$ 39,90",
+      "stock": "1002",
+      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/214535868/187e6ee603c14b8eaef9c45395e6ffef_product_images_4117349_39a046b7572e4f0694147969-0hk1i6tl8t.jpg"
+   },
+   {
+      "product": "Massageador De Cabe\u00e7a Cafune Relaxante Esferas Anti Stress Manual",
+      "code": "STO1651",
+      "price": "R$ 9,90",
+      "stock": "1007",
+      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/209834749/187e6ee603c14b8eaef9c45395e6ffef_product_images_3706974_8c449f1d17194c58ad4564e9adfd662d-1dfkf18jax.jpeg"
+   },
+   {
+      "product": "Bab\u00e1 Eletr\u00f4nica Sem Fio V\u00eddeo Voz Monitor Vis\u00e3o Noturna",
+      "code": "STO1317",
+      "price": "R$ 349,90",
+      "stock": "1000",
+      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/166353213/a29b278292.jpg"
    }
 ]
