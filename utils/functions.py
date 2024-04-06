@@ -34,18 +34,29 @@ def getProduct(url):
     database["price"] = (price.string).strip()
     database["stock"] = stock.string
     database["image"] = image["src"]
-    listData.append(database.copy())
-    
+
+
     with open("database.json", "r") as f:
         data = json.load(f)  
-    
+        print(data)
+        for produto in data:
+            print('oi')
+            if database["product"] in produto["product"]:
+                pass
+            else:
+                print("novo")
+                listData.append(produto)
+
+        listData.append(database.copy())
+              
     with open("database.json", "w") as f:
-        json.dump(listData, f, indent=3) 
-    
+        json.dump(listData, f, indent=3)
+        
     return product_information
 
 
-#print(getProduct("https://www.gruposhopmix.com/moedor-de-carne-frango-profissional-eletrica-maquina-de-moer"))
+print(getProduct("https://www.gruposhopmix.com/moedor-de-carne-frango-profissional-eletrica-maquina-de-moer"))
+
 
 def getStock():
     ...

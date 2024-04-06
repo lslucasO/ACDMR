@@ -1,9 +1,23 @@
 [
    {
+      "product": "Moedor de Carne Frango Profissional Eletrica Maquina De Moer",
+      "code": "STO632",
+      "price": "R$ 369,90",
+      "stock": "1000",
+      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/260968846957e27c168.jpg"
+   },
+   {
       "product": "Fita Fecho Adesivo 25mm X 2 Metros Macho E F\u00eamea Forte",
       "code": "STO2100",
       "price": "R$ 14,90",
-      "stock": "999",
+      "stock": "1000",
       "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/2592995798737265282.jpg"
+   },
+   {
+      "product": "CDSP - Mini Juicer Port\u00e1til com Al\u00e7a Liquidificador 400 ML Branco",
+      "code": "SP9061",
+      "price": "R$ 46,94",
+      "stock": "281",
+      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/220623875/187e6ee603c14b8e-tsd6pt85lw.jpeg"
    }
 ]
