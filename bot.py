@@ -15,30 +15,7 @@ async def on_ready():
     await client.tree.sync()    
     print(f"{client.user.name} is connected!")
     
-    
-@client.command()
-async def produto(ctx, message):
-    
-    def getProduct(url):
-        product_url = requests.get(url)
-        doc = BeautifulSoup(product_url.text, "html.parser")
-        
-        product = doc.find("h1", class_="nome-produto titulo cor-secundaria").string
-        price = doc.find("strong", class_="preco-promocional cor-principal titulo")
-        stock = doc.find("b", class_="qtde_estoque").string
-        
-        message = f"""
-        **Produto**: {product}
-        **Preço**: R$ {price["data-sell-price"]}
-        **Estoque**: {stock} 
-        """
-        
-        return message
 
-
-    
-    await ctx.send(getProduct(f"{message}"))
-    
     
 async def load():   
     for filename in os.listdir('./cogs'):
