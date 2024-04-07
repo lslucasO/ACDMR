@@ -1,4 +1,4 @@
-import discord
+import discord, json
 from utils.functions import createEmbed, createProductEmbed, getProduct, getStock
 from discord.ext import commands
 from discord import app_commands
@@ -40,16 +40,41 @@ class Buttons(discord.ui.View):
     async def remover(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.defer(ephemeral=True)
         
+        embed_image_url = "https://cdn.discordapp.com/attachments/842737517228982272/1224822590061674546/20-01.png?ex=661ee3ed&is=660c6eed&hm=af4b36c7e87cac7b9f359fd8a65feaa8242f04f055ddeb30ad06261c49a3b178&"
+        self.i = 0
+        self.listProducts = getStock()
+        self.quantity_product = await interaction.channel.send("Digite o código do produto que deseja remover")
+        self.remove_product = await interaction.client.wait_for("message")
         
-        
-        await interaction.followup.send("funciona")
-                    
+        for self.product in self.listProducts:
             
+            if self.product["code"] in str(self.remove_product.content):
+                self.listProducts.pop(self.i)
+                break
+            else:
+                self.i += 1
+                    
+        with open("database.json", "w") as f:
+            json.dump(self.listProducts, f, indent=3)
+    
+        await interaction.followup.send("Item removido com sucesso ✅")
         
-        # self.view = Buttons(timeout=None)
-
-
-
+        embed = createProductEmbed(embed_title="Seu Estoque", embed_image_url=embed_image_url, embed_field_name_list=[f"Você tem **{len(self.listProducts)}** produtos cadastrados"], embed_field_value_list=self.listProducts, number_of_value_fields=len(self.listProducts))
+        self.view = Buttons(timeout=None)
+        
+        await interaction.followup.send(embed=embed, view=self.view)
+       
+                    
+    @discord.ui.button(label="Estoque Total",style=discord.ButtonStyle.blurple)
+    async def estoqueTotal(self, interaction: discord.Interaction, button: discord.ui.Button):
+        await interaction.response.defer(ephemeral=True)
+        
+        with open('database.json', 'rb') as file:
+            try:
+                await interaction.followup.send(file=discord.File(file))
+            except FileNotFoundError:
+                await interaction.followup.send("Arquivo não encontrado.")
+      
 
 class Estoque(commands.Cog):
     def __init__(self, client):
