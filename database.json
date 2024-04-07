@@ -1,21 +1,5 @@
 [
    {
-      "product": "Pisca Pisca Cordão Com 100 Lâmpadas De Led Formato Gota 10 Metros Fio Preto",
-      "code": "STO995",
-      "price": "R$ 16,90",
-      "stock": "6",
-      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/181871918/46f9554301.jpg",
-      "url": "https://www.gruposhopmix.com/pisca-pisca-cordao-com-100-lampadas-de-led-formato-gota-10-metros-fio-preto-descricao-perfeito-para-voce-decorar-sua-casa-no-natal-e-ano-novo-decore-sua-casa-festas-casamento-vitrines-quarto-penteadeira-cabeceira-da-cama-berco-de-bebes"
-   },
-   {
-      "product": "Cordão Com 50 Lâmpadas De Led Formato Pequena Gota 5 Metros Fio Verde Escuro",
-      "code": "STO1477",
-      "price": "R$ 16,90",
-      "stock": "3",
-      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/183567259/93f9f29bad.jpg",
-      "url": "https://www.gruposhopmix.com/cordao-com-50-lampadas-de-led-formato-pequena-gota-5-metros-fio-verde-escuro"
-   },
-   {
       "product": "Led Pisca Cordão Com 10 Metros 100 Lampadas Formato Gota Fio Cor Crystal Tomada Luze Natal Ano Novo",
       "code": "STO1897",
       "price": "R$ 14,90",
@@ -24,19 +8,99 @@
       "url": "https://www.gruposhopmix.com/led-pisca-cordao-com-10-metros-100-lampadas-formato-gota-fio-cor-crystal-tomada-luze-natal-ano-novo"
    },
    {
-      "product": "Microfone Omnidirecional Lapela Entrevista Apresentações",
-      "code": "STO321",
-      "price": "R$ 59,90",
-      "stock": "996",
-      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/192870020bf30252ca1.jpg",
-      "url": "https://www.gruposhopmix.com/produto/microfone-omnidirecional-lapela-entrevista-apresentacoes.html"
+      "product": "CDSP - Luminária Mata Mosquito Led Armadilha Noturna Usb Bivolt",
+      "code": "SP9351",
+      "price": "R$ 32,90",
+      "stock": "274",
+      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/241057142/1-t832egdlhi.jpg",
+      "url": "https://www.gruposhopmix.com/cdsp-luminaria-mata-mosquito-led-armadilha-noturna-usb-bivolt"
    },
    {
-      "product": "Fio De Fada Com 10 Lampadas De Led Pisca USB e Pilha",
-      "code": "STO1009",
-      "price": "R$ 54,90",
+      "product": "Mini Fatiador 5 Em 1 Frutas Verduras Legumes",
+      "code": "STO390",
+      "price": "R$ 27,39",
+      "stock": "1001",
+      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/129698842f55d740f28.jpg",
+      "url": "https://www.gruposhopmix.com/produto/mini-fatiador-5-em-1-frutas-verduras-legumes.html"
+   },
+   {
+      "product": "Kit Banho Maquina De Tosar Cachorro Gato Cuidado Higiene",
+      "code": "STO384",
+      "price": "R$ 89,90",
       "stock": "1",
-      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/183556222/55db6128c3.jpg",
-      "url": "https://www.gruposhopmix.com/fio-de-fada-com-10-lampadas-de-led-pisca-pisca"
+      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/2008969331860476370.jpg",
+      "url": "https://www.gruposhopmix.com/produto/kit-banho-maquina-de-tosar-cachorro-gato-cuidado-higiene.html"
+   },
+   {
+      "product": "Escova Secadora De Pelos Para Pet Cachorro Gato",
+      "code": "STO332",
+      "price": "R$ 69,90",
+      "stock": "998",
+      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/1938635477a69301861.jpg",
+      "url": "https://www.gruposhopmix.com/produto/escova-secadora-de-pelos-para-pet-cachorro-gato.html"
+   },
+   {
+      "product": "Mini Cortador De Unha Pet Alicate Com Lanterna Cachorro Gato",
+      "code": "STO1544",
+      "price": "R$ 24,90",
+      "stock": "999",
+      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/191071359/sto1544-tc5t11d0e8.jpg",
+      "url": "https://www.gruposhopmix.com/mini-cortador-de-unha-pet-alicate-com-lanterna-cachorro-gato-azul"
+   },
+   {
+      "product": "Calça Bermuda Sauna Térmica Queima Gordura Feminina Sweat",
+      "code": "STO1029",
+      "price": "R$ 39,90",
+      "stock": "17",
+      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/1330277465c40ff226a.jpg",
+      "url": "https://www.gruposhopmix.com/produto/calca-bermuda-sauna-termica-queima-gordura-feminina-sweat-sh.html"
+   },
+   {
+      "product": "CDSP - Calça Modeladora  Ajustável Efeito Sauna Queima Gordura Caloria Unissex",
+      "code": "SP8729",
+      "price": "R$ 93,62",
+      "stock": "300",
+      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/258068609560eb61cf0.jpg",
+      "url": "https://www.gruposhopmix.com/cdsp-calca-modeladora-ajustavel-efeito-sauna-queima-gordura-caloria-unissex"
+   },
+   {
+      "product": "CDSP - Cinta Postural Modeladora Queima Calorias",
+      "code": "SP7099",
+      "price": "R$ 26,94",
+      "stock": "300",
+      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/2197753931895cad11c.jpg",
+      "url": "https://www.gruposhopmix.com/produto/cdsp-cinta-postural-modeladora-queima-calorias.html"
+   },
+   {
+      "product": "CDSP - Cinta Regata Feminina Queima Gorduras Barriga Camiseta",
+      "code": "SP7527",
+      "price": "R$ 43,41",
+      "stock": "300",
+      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/221956383/colete-camiseta-7h969i7crp.jpg",
+      "url": "https://www.gruposhopmix.com/cdsp-cinta-regata-feminina-queima-gorduras-barriga-camiseta"
+   },
+   {
+      "product": "Cinta Regata Masculina Queima Gorduras Barriga Camiseta",
+      "code": "STO470",
+      "price": "R$ 29,90",
+      "stock": "970",
+      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/1293109190ff7d96429.jpg",
+      "url": "https://www.gruposhopmix.com/produto/cinta-regata-masculina-queima-gorduras-barriga-camiseta.html"
+   },
+   {
+      "product": "Máquina De Queima De Gordura Cinta Vibratória",
+      "code": "STO1229",
+      "price": "R$ 62,90",
+      "stock": "1000",
+      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/161389189/1387d510d4.jpg",
+      "url": "https://www.gruposhopmix.com/maquina-de-queima-de-gordura-cinta-vibratoria"
+   },
+   {
+      "product": "Mini Tripe Suporte Para Celular Articulado De Mesa Universal",
+      "code": "STO2118",
+      "price": "R$ 9,90",
+      "stock": "998",
+      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/260861142/9-zffzi7lynk.jpg",
+      "url": "https://www.gruposhopmix.com/mini-tripe-suporte-para-celular-articulado-de-mesa-universal"
    }
 ]
