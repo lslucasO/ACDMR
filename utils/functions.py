@@ -39,6 +39,7 @@ def getProduct(url):
     image = doc.find("img", id="imagemProduto")
     code = doc.find("span", itemprop="sku").string
     
+    
     product_information = [product, price["data-sell-price"], stock, image["src"], code]
     
     database["product"] = product
@@ -47,7 +48,8 @@ def getProduct(url):
     database["stock"] = stock.string
     database["image"] = image["src"]
     database["url"] = url
-
+    
+     
     with open("database.json", "r", encoding="utf-8") as f:
         data = json.load(f)  
         
@@ -55,7 +57,6 @@ def getProduct(url):
             if database["product"] in produto["product"]:
                 pass
             else:
-         
                 listData.append(produto)
 
         listData.append(database.copy())
@@ -66,7 +67,7 @@ def getProduct(url):
     return product_information
 
 
-#print(getProduct("https://www.gruposhopmix.com/moedor-de-carne-frango-profissional-eletrica-maquina-de-moer"))
+# print(getProduct("https://www.gruposhopmix.com/cinta-calcinha-modeladora-aperta-barriga-alta-compressao-flores"))
 
 
 def getStock():

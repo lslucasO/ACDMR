@@ -80,14 +80,6 @@
       "url": "https://www.gruposhopmix.com/cdsp-cinta-regata-feminina-queima-gorduras-barriga-camiseta"
    },
    {
-      "product": "Cinta Regata Masculina Queima Gorduras Barriga Camiseta",
-      "code": "STO470",
-      "price": "R$ 29,90",
-      "stock": "970",
-      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/1293109190ff7d96429.jpg",
-      "url": "https://www.gruposhopmix.com/produto/cinta-regata-masculina-queima-gorduras-barriga-camiseta.html"
-   },
-   {
       "product": "Máquina De Queima De Gordura Cinta Vibratória",
       "code": "STO1229",
       "price": "R$ 62,90",
@@ -102,5 +94,13 @@
       "stock": "998",
       "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/260861142/9-zffzi7lynk.jpg",
       "url": "https://www.gruposhopmix.com/mini-tripe-suporte-para-celular-articulado-de-mesa-universal"
+   },
+   {
+      "product": "Cinta Regata Masculina Queima Gorduras Barriga Camiseta",
+      "code": "STO470",
+      "price": "R$ 29,90",
+      "stock": "970",
+      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/1293109190ff7d96429.jpg",
+      "url": "https://www.gruposhopmix.com/produto/cinta-regata-masculina-queima-gorduras-barriga-camiseta.html"
    }
 ]

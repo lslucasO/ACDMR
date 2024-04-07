@@ -16,7 +16,6 @@ async def on_ready():
     print(f"{client.user.name} is connected!")
     
 
-    
 async def load():   
     for filename in os.listdir('./cogs'):
         if filename.endswith('.py'):
