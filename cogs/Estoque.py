@@ -24,7 +24,7 @@ class Buttons(discord.ui.View):
             
             await interaction.followup.send(embed=embed)
         
-        
+        await interaction.followup.send("Produto **adicionado** com sucesso ")
         embed_image_url = "https://cdn.discordapp.com/attachments/842737517228982272/1224822590061674546/20-01.png?ex=661ee3ed&is=660c6eed&hm=af4b36c7e87cac7b9f359fd8a65feaa8242f04f055ddeb30ad06261c49a3b178&"
         
         listProducts = getStock()
