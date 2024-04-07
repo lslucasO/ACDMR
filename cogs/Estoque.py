@@ -59,7 +59,7 @@ class Buttons(discord.ui.View):
     
         await interaction.followup.send("Item removido com sucesso ✅")
         
-        embed = createProductEmbed(embed_title="Seu Estoque", embed_image_url=embed_image_url, embed_field_name_list=[f"Você tem **{len(self.listProducts)}** produtos cadastrados"], embed_field_value_list=self.listProducts, number_of_value_fields=len(self.listProducts))
+        embed = createProductEmbed(embed_title="Seu Estoque", embed_image_url=embed_image_url, embed_field_name_list=[f"Você tem {len(self.listProducts)} produtos cadastrados"], embed_field_value_list=self.listProducts, number_of_value_fields=len(self.listProducts))
         self.view = Buttons(timeout=None)
         
         await interaction.followup.send(embed=embed, view=self.view)
@@ -89,7 +89,7 @@ class Estoque(commands.Cog):
         
         
         
-        embed = createProductEmbed(embed_title="Seu Estoque", embed_image_url=embed_image_url, embed_field_name_list=[f"Você tem **{len(listProducts)}** produtos cadastrados, mas apenas esses estão com pouco estoque."], embed_field_value_list=listProducts, number_of_value_fields=len(listProducts))
+        embed = createProductEmbed(embed_title="Seu Estoque", embed_image_url=embed_image_url, embed_field_name_list=[f"Você tem {len(listProducts)} produtos cadastrados, mas apenas esses estão com pouco estoque."], embed_field_value_list=listProducts, number_of_value_fields=len(listProducts))
         
         self.view = Buttons(timeout=None)
         

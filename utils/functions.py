@@ -9,7 +9,7 @@ def createEmbed(embed_title, embed_field_name_list, embed_field_value_list, numb
     embed.set_thumbnail(url=embed_image_url)
     
     for field in range(number_of_fields):   
-        embed.add_field(name=f"{embed_field_name_list[field]}", value=f"{embed_field_value_list[field]}", inline=True)
+        embed.add_field(name=f"{embed_field_name_list[field]}", value=f"{embed_field_value_list[field]}", inline=False)
 
     return embed  
 
@@ -21,7 +21,7 @@ def createProductEmbed(embed_title, embed_field_name_list, embed_field_value_lis
     
     for field in range(number_of_value_fields): 
         if int(embed_field_value_list[field]["stock"]) <= 50:   
-            embed.add_field(name=f"{field+1}. **{embed_field_value_list[field]['product']}**", value=f"Estoque: **{embed_field_value_list[field]['stock']}** Unidades ⚠️\n Código: **{embed_field_value_list[field]['code']}**", inline=True)
+            embed.add_field(name=f"{field+1}. **{embed_field_value_list[field]['product']}**", value=f"Estoque: **{embed_field_value_list[field]['stock']}** Unidades ⚠️\n Código: **{embed_field_value_list[field]['code']}**", inline=False)
         
     return embed
 
@@ -46,8 +46,9 @@ def getProduct(url):
     database["price"] = (price.string).strip()
     database["stock"] = stock.string
     database["image"] = image["src"]
+    database["url"] = url
 
-    with open("database.json", "r") as f:
+    with open("database.json", "r", encoding="utf-8") as f:
         data = json.load(f)  
         
         for produto in data:
@@ -59,8 +60,8 @@ def getProduct(url):
 
         listData.append(database.copy())
               
-    with open("database.json", "w") as f:
-        json.dump(listData, f, indent=3)
+    with open("database.json", "w", encoding="utf-8") as f:
+        json.dump(listData, f, ensure_ascii=False, indent=3)
         
     return product_information
 
@@ -71,7 +72,7 @@ def getProduct(url):
 def getStock():
     listProducts = []
     
-    with open("database.json", "r") as f:
+    with open("database.json", "r", encoding="utf-8") as f:
         data = json.load(f)  
         
         for produto in data:
@@ -80,4 +81,18 @@ def getStock():
     return listProducts
     
 
-getStock()
+# Função para corrigir a acentuação
+def corrigir_acentuacao(texto):
+    return texto.encode('latin1').decode('unicode_escape')
+
+    # Carregar o arquivo JSON
+    with open('dados.json', 'r', encoding='utf-8') as arquivo:
+        dados = json.load(arquivo)
+
+    # Corrigir a acentuação
+    for chave, valor in dados.items():
+        dados[chave] = corrigir_acentuacao(valor)
+
+    # Salvar de volta para o arquivo JSON
+    with open('dados_corrigidos.json', 'w', encoding='utf-8') as arquivo:
+        json.dump(dados, arquivo, ensure_ascii=False, indent=2)
