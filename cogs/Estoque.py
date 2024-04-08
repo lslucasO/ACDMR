@@ -71,7 +71,7 @@ class Buttons(discord.ui.View):
             else:
                 self.i += 1
                     
-        with open("database.json", "w", encoding="utf-8") as f:
+        with open("database/products.json", "w", encoding="utf-8") as f:
             json.dump(self.listProducts, f, ensure_ascii=False, indent=3)
     
         self.confirm_message = await interaction.followup.send("Item removido com sucesso ✅")
@@ -94,13 +94,16 @@ class Buttons(discord.ui.View):
     @discord.ui.button(label="Estoque Total",style=discord.ButtonStyle.blurple)
     async def estoqueTotal(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.defer(ephemeral=True)
-        
-        with open('database.json', 'rb') as file:
+        self.msg_list = []
+        with open('database/products.json', 'rb') as file:
             try:
-                await interaction.followup.send(file=discord.File(file))
+                self.msg_file = await interaction.followup.send(file=discord.File(file))
             except FileNotFoundError:
                 await interaction.followup.send("Arquivo não encontrado.")
-      
+        self.msg_list.append(self.msg_file)         
+        sleep(30)
+        await interaction.channel.delete_messages(messages=self.msg_list)
+        
       
     @discord.ui.button(label="Atualizar Estoque",style=discord.ButtonStyle.secondary)
     async def atualizarEstoque(self, interaction: discord.Interaction, button: discord.ui.Button):

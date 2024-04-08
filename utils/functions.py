@@ -38,7 +38,7 @@ def saveProduct(product_information):
     database["code"] = product_information[4]
     database["url"] =product_information[5]
     
-    with open("database.json", "r", encoding="utf-8") as f:
+    with open("database/products.json", "r", encoding="utf-8") as f:
         data = json.load(f)  
         
         for produto in data:
@@ -49,7 +49,7 @@ def saveProduct(product_information):
 
         listData.append(database.copy())
      
-    with open("database.json", "w", encoding="utf-8") as f:
+    with open("database/products.json", "w", encoding="utf-8") as f:
         json.dump(listData, f, ensure_ascii=False, indent=3)
 
 
@@ -72,7 +72,7 @@ def getStock():
     
     listProducts = []
     
-    with open("database.json", "r", encoding="utf-8") as f:
+    with open("database/products.json", "r", encoding="utf-8") as f:
         data = json.load(f)  
         
         for produto in data:
