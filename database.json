@@ -1,18 +1,26 @@
 [
    {
       "product": "Tapete Antiderrapante Lava Pés Massageador C/ Ventosas",
-      "code": "STO1632",
-      "price": "R$ 24,90",
+      "price": "24.90",
       "stock": "1003",
       "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/203327465/187e6ee603c14b8eaef9c45395e6ffef_product_images_3620137_b541a357c9b64f398eae27c90b00b6c1-yzppxr.jpg",
+      "code": "STO1632",
       "url": "https://www.gruposhopmix.com/tapete-antiderrapante-lava-pes-massageador-c-ventosas"
    },
    {
-      "product": "Cinta Calcinha Modeladora Aperta Barriga Alta Compressão Flores",
-      "code": "STO1566",
-      "price": "R$ 34,90",
-      "stock": "1001",
-      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/193877201/dm_20221222155410_002-41e0df8ad8.jpg",
-      "url": "https://www.gruposhopmix.com/cinta-calcinha-modeladora-aperta-barriga-alta-compressao-flores"
+      "product": "Massageador Golfinho Elétrico Aparelho Escultor Corpo Saúde",
+      "price": "82.90",
+      "stock": "999",
+      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/252451936fb0673eccb.jpg",
+      "code": "STO567",
+      "url": "https://www.gruposhopmix.com/aparelho-massageador-sculptor-eletrico-golfinho-corpo-saude"
+   },
+   {
+      "product": "Aparelho Massageador De Pés Elétrico Shiatsu Pernas Bivolt",
+      "price": "157.90",
+      "stock": "2",
+      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/228020542/dm_20230803142711_001-twh9hxx1dh.jpg",
+      "code": "STO1824",
+      "url": "https://www.gruposhopmix.com/aparelho-massageador-de-pes-eletrico-shiatsu-pernas-bivolt"
    }
 ]

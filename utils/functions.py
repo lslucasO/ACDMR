@@ -32,7 +32,7 @@ def saveProduct(product_information):
     listData = []
 
     database["product"] = product_information[0]
-    database["price"] = product_information[1]
+    database["price"] = product_information[1].strip()
     database["stock"] = product_information[2]
     database["image"] = product_information[3]
     database["code"] = product_information[4]
@@ -59,17 +59,17 @@ def getProduct(url):
     doc = BeautifulSoup(product_url.text, "html.parser")
     
     product = doc.find("h1", class_="nome-produto titulo cor-secundaria").string
-    price = (doc.find("strong", class_="preco-promocional cor-principal titulo").string).strip()
+    price = doc.find("strong", class_="preco-promocional cor-principal titulo")
     stock = doc.find("b", class_="qtde_estoque").string
     image = doc.find("img", id="imagemProduto")
     code = doc.find("span", itemprop="sku").string
-    
     product_information = [product, price["data-sell-price"], stock, image["src"], code, url]
         
     return product_information
 
 
 def getStock():
+    
     listProducts = []
     
     with open("database.json", "r", encoding="utf-8") as f:
@@ -87,7 +87,7 @@ def updateStock():
     
     for product in listProducts:
         
-        current_product = getProduct(url=product["url"])
+        current_product = getProduct(product["url"])
         new_stock = int(current_product[2])
         old_stock = int(product["stock"])
         
@@ -103,9 +103,6 @@ def updateStock():
             pass
     
             
-        
-   
+# produto = getProduct("https://www.gruposhopmix.com/tapete-antiderrapante-lava-pes-massageador-c-ventosas")
+# saveProduct(produto)
 
-    
-print(getProduct("https://www.gruposhopmix.com/cinta-calcinha-modeladora-aperta-barriga-alta-compressao-flores"))
-    
