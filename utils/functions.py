@@ -26,30 +26,18 @@ def createProductEmbed(embed_title, embed_field_name_list, embed_field_value_lis
     return embed
 
 
-def getProduct(url):
+def saveProduct(product_information):
+    
     database = {}
     listData = []
+
+    database["product"] = product_information[0]
+    database["price"] = product_information[1]
+    database["stock"] = product_information[2]
+    database["image"] = product_information[3]
+    database["code"] = product_information[4]
+    database["url"] =product_information[5]
     
-    product_url = requests.get(url)
-    doc = BeautifulSoup(product_url.text, "html.parser")
-    
-    product = doc.find("h1", class_="nome-produto titulo cor-secundaria").string
-    price = doc.find("strong", class_="preco-promocional cor-principal titulo")
-    stock = doc.find("b", class_="qtde_estoque").string
-    image = doc.find("img", id="imagemProduto")
-    code = doc.find("span", itemprop="sku").string
-    
-    
-    product_information = [product, price["data-sell-price"], stock, image["src"], code]
-    
-    database["product"] = product
-    database["code"] = code
-    database["price"] = (price.string).strip()
-    database["stock"] = stock.string
-    database["image"] = image["src"]
-    database["url"] = url
-    
-     
     with open("database.json", "r", encoding="utf-8") as f:
         data = json.load(f)  
         
@@ -60,14 +48,25 @@ def getProduct(url):
                 listData.append(produto)
 
         listData.append(database.copy())
-              
+     
     with open("database.json", "w", encoding="utf-8") as f:
         json.dump(listData, f, ensure_ascii=False, indent=3)
+
+
+def getProduct(url):
+    
+    product_url = requests.get(url)
+    doc = BeautifulSoup(product_url.text, "html.parser")
+    
+    product = doc.find("h1", class_="nome-produto titulo cor-secundaria").string
+    price = (doc.find("strong", class_="preco-promocional cor-principal titulo").string).strip()
+    stock = doc.find("b", class_="qtde_estoque").string
+    image = doc.find("img", id="imagemProduto")
+    code = doc.find("span", itemprop="sku").string
+    
+    product_information = [product, price["data-sell-price"], stock, image["src"], code, url]
         
     return product_information
-
-
-# print(getProduct("https://www.gruposhopmix.com/cinta-calcinha-modeladora-aperta-barriga-alta-compressao-flores"))
 
 
 def getStock():
@@ -80,20 +79,33 @@ def getStock():
             listProducts.append(produto)
             
     return listProducts
+
+
+def updateStock():
+
+    listProducts = getStock()
     
+    for product in listProducts:
+        
+        current_product = getProduct(url=product["url"])
+        new_stock = int(current_product[2])
+        old_stock = int(product["stock"])
+        
+        if new_stock < old_stock:
+            # Tivemos uma venda
+            sale = old_stock - new_stock
+            # Estoque atual
+            current_stock = old_stock - sale    
+            # Atualizar o produto
+            current_product[2] = current_stock
+            saveProduct(current_product)
+        else:
+            pass
+    
+            
+        
+   
 
-# Função para corrigir a acentuação
-def corrigir_acentuacao(texto):
-    return texto.encode('latin1').decode('unicode_escape')
-
-    # Carregar o arquivo JSON
-    with open('dados.json', 'r', encoding='utf-8') as arquivo:
-        dados = json.load(arquivo)
-
-    # Corrigir a acentuação
-    for chave, valor in dados.items():
-        dados[chave] = corrigir_acentuacao(valor)
-
-    # Salvar de volta para o arquivo JSON
-    with open('dados_corrigidos.json', 'w', encoding='utf-8') as arquivo:
-        json.dump(dados, arquivo, ensure_ascii=False, indent=2)
+    
+print(getProduct("https://www.gruposhopmix.com/cinta-calcinha-modeladora-aperta-barriga-alta-compressao-flores"))
+    
