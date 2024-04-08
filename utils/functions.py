@@ -32,10 +32,10 @@ def saveProduct(product_information):
     listData = []
 
     database["product"] = product_information[0]
+    database["code"] = product_information[4]
     database["price"] = product_information[1].strip()
     database["stock"] = product_information[2]
     database["image"] = product_information[3]
-    database["code"] = product_information[4]
     database["url"] =product_information[5]
     
     with open("database/products.json", "r", encoding="utf-8") as f:

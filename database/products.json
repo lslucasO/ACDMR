@@ -1,26 +1,18 @@
 [
    {
       "product": "Tapete Antiderrapante Lava Pés Massageador C/ Ventosas",
+      "code": "STO1632",
       "price": "24.90",
       "stock": "1003",
       "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/203327465/187e6ee603c14b8eaef9c45395e6ffef_product_images_3620137_b541a357c9b64f398eae27c90b00b6c1-yzppxr.jpg",
-      "code": "STO1632",
       "url": "https://www.gruposhopmix.com/tapete-antiderrapante-lava-pes-massageador-c-ventosas"
    },
    {
-      "product": "Aparelho Massageador De Pés Elétrico Shiatsu Pernas Bivolt",
-      "price": "157.90",
-      "stock": "2",
-      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/228020542/dm_20230803142711_001-twh9hxx1dh.jpg",
-      "code": "STO1824",
-      "url": "https://www.gruposhopmix.com/aparelho-massageador-de-pes-eletrico-shiatsu-pernas-bivolt"
-   },
-   {
       "product": "Drenagem Linfática Massageador Elétrico Portátil 110V",
+      "code": "STO77RX110V",
       "price": "69.90",
       "stock": "998",
       "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/1309124044453604353.jpg",
-      "code": "STO77RX110V",
       "url": "https://www.gruposhopmix.com/produto/drenagem-linfatica-massageador-eletrico-portatil-110v.html"
    }
 ]
