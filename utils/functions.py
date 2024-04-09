@@ -9,6 +9,7 @@ def createEmbed(embed_title, embed_field_name_list, embed_field_value_list, numb
     embed.set_thumbnail(url=embed_image_url)
     
     for field in range(number_of_fields):   
+        print(field)
         embed.add_field(name=f"{embed_field_name_list[field]}", value=f"{embed_field_value_list[field]}", inline=False)
 
     return embed  
@@ -139,14 +140,21 @@ def getSales():
             
     if len(listSales) == 0:
         listSales.append("Nenhum produto foi vendido hoje ;(")
-    else:
-        return listSales
+
+    return listSales
 
 
          
 # produto = getProduct("https://www.gruposhopmix.com/tapete-antiderrapante-lava-pes-massageador-c-ventosas")
 # saveProduct(produto)
 
-getSales()
+# print(len(getSales()))
 # updateStock()
 # print(getSales())
+
+# listSales = getSales()
+
+# embed_image_url = "https://cdn.discordapp.com/attachments/842737517228982272/1224822590061674546/20-01.png?ex=661ee3ed&is=660c6eed&hm=af4b36c7e87cac7b9f359fd8a65feaa8242f04f055ddeb30ad06261c49a3b178&"
+
+# embed = createEmbed(embed_title="Relatório de Vendas", embed_image_url=embed_image_url, embed_field_name_list=[f"Você teve {len(listSales)} produtos vendidos"], embed_field_value_list=listSales, number_of_fields=len(listSales))
+        
