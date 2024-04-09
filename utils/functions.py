@@ -104,6 +104,7 @@ def updateStock():
       
         
         if new_stock < old_stock:
+            print("Oi")
             # Tivemos uma venda
             sale = old_stock - new_stock
             # Estoque atual
@@ -114,11 +115,12 @@ def updateStock():
             sales["product"] = product["product"]
             sales["sales"] = sale
             
-            saveDatabase(current_product)
+           
         else:
             pass
+        
     
-    if len(salesList) == 0:
+    if len(sales) == 0:
         pass
     else:
         salesList.append(sales.copy())
@@ -149,6 +151,7 @@ def getSales():
 # saveProduct(produto)
 
 # print(len(getSales()))
+# updateStock()
 # updateStock()
 # print(getSales())
 

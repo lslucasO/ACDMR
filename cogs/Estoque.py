@@ -6,7 +6,7 @@ from discord import app_commands
 
 class Buttons(discord.ui.View):
 
-    @discord.ui.button(label="Cadastrar",style=discord.ButtonStyle.green)
+    @discord.ui.button(label="🖥️ Cadastrar",style=discord.ButtonStyle.green)
     async def cadastrar(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.defer(ephemeral=True)
         
@@ -32,7 +32,7 @@ class Buttons(discord.ui.View):
             
             embed = createEmbed(embed_title=f"{self.product_information[0]}", embed_field_name_list=[f"Estoque:", f"Preço:"], embed_field_value_list=[f"{self.product_information[2]} Unidades", f"R${self.product_information[1]}"], number_of_fields=2, embed_image_url=f"{self.product_information[3]}")
             
-            await interaction.followup.send(embed=embed)
+            await interaction.followup.send(embed=embed, ephemeral=True)
         
         self.confirm_message = await interaction.followup.send("Produto **adicionado** com sucesso ")
         self.msg_list.append(self.confirm_message)
@@ -42,7 +42,8 @@ class Buttons(discord.ui.View):
         
         listProducts = getStock()
 
-        embed = createProductEmbed(embed_title="Seu Estoque", embed_image_url=embed_image_url, embed_field_name_list=[f"Você tem **{len(listProducts)}** produtos cadastrados, mas apenas serão exibidos os que possuem pouco estoque."], embed_field_value_list=listProducts, number_of_value_fields=len(listProducts))
+        embed = createProductEmbed(embed_title="📦 Seu Estoque", embed_image_url=embed_image_url, embed_field_name_list=[f"Você tem {len(listProducts)} produtos cadastrados, mas apenas serão exibidos os que possuem poucas unidades."], embed_field_value_list=listProducts, number_of_value_fields=len(listProducts))
+        
         self.view = Buttons(timeout=None)
         
 
@@ -52,12 +53,12 @@ class Buttons(discord.ui.View):
         await interaction.channel.delete_messages(messages=self.msg_list)
     
 
-    @discord.ui.button(label="Remover",style=discord.ButtonStyle.red)
+    @discord.ui.button(label="❌ Remover",style=discord.ButtonStyle.red)
     async def remover(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.defer(ephemeral=True)
         
         embed_image_url = "https://cdn.discordapp.com/attachments/842737517228982272/1224822590061674546/20-01.png?ex=661ee3ed&is=660c6eed&hm=af4b36c7e87cac7b9f359fd8a65feaa8242f04f055ddeb30ad06261c49a3b178&"
-        self.i = 0
+        i = 0
         self.msg_list = []
         self.listProducts = getStock()
         self.quantity_product = await interaction.channel.send("Digite o código do produto que deseja remover")
@@ -66,17 +67,17 @@ class Buttons(discord.ui.View):
         for self.product in self.listProducts:
             
             if self.product["code"] in str(self.remove_product.content):
-                self.listProducts.pop(self.i)
+                self.listProducts.pop(i)
                 break
             else:
-                self.i += 1
+                i += 1
                     
         with open("database/products.json", "w", encoding="utf-8") as f:
             json.dump(self.listProducts, f, ensure_ascii=False, indent=3)
     
         self.confirm_message = await interaction.followup.send("Item removido com sucesso ✅")
         
-        embed = createProductEmbed(embed_title="Seu Estoque", embed_image_url=embed_image_url, embed_field_name_list=[f"Você tem **{len(self.listProducts)}** produtos cadastrados, mas apenas serão exibidos os que possuem pouco estoque."], embed_field_value_list=self.listProducts, number_of_value_fields=len(self.listProducts))
+        embed = createProductEmbed(embed_title="📦 Seu Estoque", embed_image_url=embed_image_url, embed_field_name_list=[f"Você tem {len(self.listProducts)} produtos cadastrados, mas apenas serão exibidos os que possuem poucas unidades."], embed_field_value_list=self.listProducts, number_of_value_fields=len(self.listProducts))
         
         self.view = Buttons(timeout=None)
         
@@ -89,23 +90,9 @@ class Buttons(discord.ui.View):
         sleep(3)
         await interaction.delete_original_response()
         await interaction.channel.delete_messages(messages=self.msg_list)
-                    
-                    
-    @discord.ui.button(label="Estoque Total",style=discord.ButtonStyle.blurple)
-    async def estoqueTotal(self, interaction: discord.Interaction, button: discord.ui.Button):
-        await interaction.response.defer(ephemeral=True)
-        self.msg_list = []
-        with open('database/products.json', 'rb') as file:
-            try:
-                self.msg_file = await interaction.followup.send(file=discord.File(file))
-            except FileNotFoundError:
-                await interaction.followup.send("Arquivo não encontrado.")
-        self.msg_list.append(self.msg_file)         
-        
-        # await interaction.channel.delete_messages(messages=self.msg_list)
-        
       
-    @discord.ui.button(label="Atualizar Estoque",style=discord.ButtonStyle.secondary)
+                    
+    @discord.ui.button(label="🔃 Atualizar Estoque",style=discord.ButtonStyle.blurple)
     async def atualizarEstoque(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.defer(ephemeral=True)
         self.msg_list = []
@@ -126,12 +113,25 @@ class Buttons(discord.ui.View):
         
         embed = createEmbed(embed_title="Relatório de Vendas", embed_image_url=embed_image_url, embed_field_name_list=[self.sale_message], embed_field_value_list=listSales, number_of_fields=len(listSales))
         
-        self.embed_msg = await interaction.followup.send(embed=embed)
+        self.embed_msg = await interaction.followup.send(embed=embed, ephemeral=True)
         self.msg_list.append(self.confirm_message)
-        self.msg_list.append(self.embed_msg)
-        sleep(60)
+        sleep(3)
         await interaction.channel.delete_messages(messages=self.msg_list)
         
+                        
+    @discord.ui.button(label="💾 Arquivo",style=discord.ButtonStyle.gray)
+    async def estoqueTotal(self, interaction: discord.Interaction, button: discord.ui.Button):
+        await interaction.response.defer(ephemeral=True)
+        self.msg_list = []
+        with open('database/products.json', 'rb') as file:
+            try:
+                self.msg_file = await interaction.followup.send(file=discord.File(file), ephemeral=True)
+            except FileNotFoundError:
+                await interaction.followup.send("Arquivo não encontrado.")
+        self.msg_list.append(self.msg_file)         
+        
+        # await interaction.channel.delete_messages(messages=self.msg_list)
+
 
 class Estoque(commands.Cog):
     def __init__(self, client):
@@ -145,7 +145,7 @@ class Estoque(commands.Cog):
         
         listProducts = getStock()
         
-        embed = createProductEmbed(embed_title="Seu Estoque", embed_image_url=embed_image_url, embed_field_name_list=[f"Você tem {len(listProducts)} produtos cadastrados, mas apenas esses estão com pouco estoque."], embed_field_value_list=listProducts, number_of_value_fields=len(listProducts))
+        embed = createProductEmbed(embed_title="📦 Seu Estoque", embed_image_url=embed_image_url, embed_field_name_list=[f"Você tem {len(listProducts)} produtos cadastrados, mas apenas serão exibidos os que possuem poucas unidades."], embed_field_value_list=listProducts, number_of_value_fields=len(listProducts))
         
         self.view = Buttons(timeout=None)
         

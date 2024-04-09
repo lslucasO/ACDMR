@@ -11,6 +11,11 @@ client = commands.Bot(command_prefix="!", intents=discord.Intents.all())
 
 
 @client.event
+async def on_message(message):
+    if message.author.bot: 
+        return
+
+@client.event
 async def on_ready():
     await client.tree.sync()    
     print(f"{client.user.name} is connected!")
