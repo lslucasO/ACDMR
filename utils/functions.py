@@ -26,19 +26,25 @@ def createProductEmbed(embed_title, embed_field_name_list, embed_field_value_lis
     return embed
 
 
-def saveProduct(product_information):
+def saveDatabase(path, sales=None, product=None):
     
     database = {}
     listData = []
-
-    database["product"] = product_information[0]
-    database["code"] = product_information[4]
-    database["price"] = product_information[1].strip()
-    database["stock"] = product_information[2]
-    database["image"] = product_information[3]
-    database["url"] =product_information[5]
     
-    with open("database/products.json", "r", encoding="utf-8") as f:
+    if product:
+        database["product"] = product[0]
+        database["code"] = product[4]
+        database["price"] = product[1].strip()
+        database["stock"] = product[2]
+        database["image"] = product[3]
+        database["url"] =product[5]
+    elif sales:
+        for sale in sales:
+            database["product"] = sale["product"]
+            database["sale"] = sale["sales"]
+        
+    
+    with open(f"{path}", "r", encoding="utf-8") as f:
         data = json.load(f)  
         
         for produto in data:
@@ -49,7 +55,7 @@ def saveProduct(product_information):
 
         listData.append(database.copy())
      
-    with open("database/products.json", "w", encoding="utf-8") as f:
+    with open(f"{path}", "w", encoding="utf-8") as f:
         json.dump(listData, f, ensure_ascii=False, indent=3)
 
 
@@ -63,6 +69,7 @@ def getProduct(url):
     stock = doc.find("b", class_="qtde_estoque").string
     image = doc.find("img", id="imagemProduto")
     code = doc.find("span", itemprop="sku").string
+    
     product_information = [product, price["data-sell-price"], stock, image["src"], code, url]
         
     return product_information
@@ -84,12 +91,16 @@ def getStock():
 def updateStock():
 
     listProducts = getStock()
+    sales = {}
+    salesList = []
     
     for product in listProducts:
         
         current_product = getProduct(product["url"])
         new_stock = int(current_product[2])
+
         old_stock = int(product["stock"])
+      
         
         if new_stock < old_stock:
             # Tivemos uma venda
@@ -98,11 +109,44 @@ def updateStock():
             current_stock = old_stock - sale    
             # Atualizar o produto
             current_product[2] = current_stock
-            saveProduct(current_product)
+            
+            sales["product"] = product["product"]
+            sales["sales"] = sale
+            
+            saveDatabase(current_product)
         else:
             pass
     
+    if len(salesList) == 0:
+        pass
+    else:
+        salesList.append(sales.copy())
+        saveDatabase(path="database/sales.json", sales=salesList)
+    
+    
+    
+ 
+    
+def getSales():
+    
+    listSales = []
+    
+    with open("database/sales.json", "r", encoding="utf-8") as f:
+        data = json.load(f)  
+        
+        for sale in data:
+            listSales.append(sale)
             
+    if len(listSales) == 0:
+        listSales.append("Nenhum produto foi vendido hoje ;(")
+    else:
+        return listSales
+
+
+         
 # produto = getProduct("https://www.gruposhopmix.com/tapete-antiderrapante-lava-pes-massageador-c-ventosas")
 # saveProduct(produto)
 
+getSales()
+# updateStock()
+# print(getSales())

@@ -1,6 +1,6 @@
 import discord, json
 from time import sleep
-from utils.functions import createEmbed, createProductEmbed, getProduct, getStock, saveProduct, updateStock
+from utils.functions import createEmbed, createProductEmbed, getProduct, getStock, saveDatabase, updateStock
 from discord.ext import commands
 from discord import app_commands
 
@@ -28,7 +28,7 @@ class Buttons(discord.ui.View):
             # Peguei o produto
             self.product_information = getProduct(self.url)
             # Salvando na database
-            saveProduct(self.product_information)
+            saveDatabase(path="database/products.json", product=self.product_information)
             
             embed = createEmbed(embed_title=f"{self.product_information[0]}", embed_field_name_list=[f"Estoque:", f"Preço:"], embed_field_value_list=[f"{self.product_information[2]} Unidades", f"R${self.product_information[1]}"], number_of_fields=2, embed_image_url=f"{self.product_information[3]}")
             
@@ -114,10 +114,15 @@ class Buttons(discord.ui.View):
         self.confirm_message = await interaction.followup.send("Seu estoque foi atualizado com sucesso ✅")
         sleep(1)
         
+        
+        
         embed_image_url = "https://cdn.discordapp.com/attachments/842737517228982272/1224822590061674546/20-01.png?ex=661ee3ed&is=660c6eed&hm=af4b36c7e87cac7b9f359fd8a65feaa8242f04f055ddeb30ad06261c49a3b178&"
         listProducts = getStock()
 
+        embed_relatorio = createEmbed(embed_title="Relatório de Vendas", embed_image_url=embed_image_url, embed_field_name_list=[f"{}"], embed_field_value_list=[f""], number_of_value_fields=len(listProducts))
+        
         embed = createProductEmbed(embed_title="Seu Estoque", embed_image_url=embed_image_url, embed_field_name_list=[f"Você tem **{len(listProducts)}** produtos cadastrados, mas apenas serão exibidos os que possuem pouco estoque."], embed_field_value_list=listProducts, number_of_value_fields=len(listProducts))
+        
         self.view = Buttons(timeout=None)
         
         self.msg_list.append(self.confirm_message)
