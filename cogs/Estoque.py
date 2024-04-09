@@ -154,12 +154,7 @@ class Buttons(discord.ui.View):
         self.view = Dropdown()
         
         self.msg_file = await interaction.followup.send(view=self.view, ephemeral=True)
-        # with open('database/products.json', 'rb') as file:
-        #     try:
-        #         self.msg_file = await interaction.followup.send(file=discord.File(file), view=self.view, ephemeral=True)
-        #     except FileNotFoundError:
-        #         await interaction.followup.send("Arquivo não encontrado.")
-                
+       
        
 class Estoque(commands.Cog):
     def __init__(self, client):
