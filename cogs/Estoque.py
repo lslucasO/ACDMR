@@ -4,6 +4,35 @@ from utils.functions import createEmbed, createProductEmbed, getProduct, getSale
 from discord.ext import commands
 from discord import app_commands
 
+
+class Dropdown(discord.ui.View):
+
+    @discord.ui.select(
+        placeholder="Selecione qual arquivo quer consultar",
+        options= [
+            discord.SelectOption(label="📁 Produtos", value="1"),
+            discord.SelectOption(label="💲 Vendas", value="2"),
+        ]
+    )
+    
+    async def arquivo(self, interaction: discord.Interaction, select_item: discord.ui.Select):
+        await interaction.response.defer()
+        
+        self.data = select_item.values
+        
+        if int(self.data[0]) == 1:   
+            self.path = "database/products.json"
+        else:
+            self.path = "database/sales.json"
+        
+        
+        with open(f'{self.path}', 'rb') as file:
+            try:
+                self.msg_file = await interaction.followup.send(file=discord.File(file), ephemeral=True)
+            except FileNotFoundError:
+                await interaction.followup.send("Arquivo não encontrado.")
+
+
 class Buttons(discord.ui.View):
 
     @discord.ui.button(label="🖥️ Cadastrar",style=discord.ButtonStyle.green)
@@ -122,17 +151,16 @@ class Buttons(discord.ui.View):
     @discord.ui.button(label="💾 Arquivo",style=discord.ButtonStyle.gray)
     async def estoqueTotal(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.defer(ephemeral=True)
-        self.msg_list = []
-        with open('database/products.json', 'rb') as file:
-            try:
-                self.msg_file = await interaction.followup.send(file=discord.File(file), ephemeral=True)
-            except FileNotFoundError:
-                await interaction.followup.send("Arquivo não encontrado.")
-        self.msg_list.append(self.msg_file)         
+        self.view = Dropdown()
         
-        # await interaction.channel.delete_messages(messages=self.msg_list)
-
-
+        self.msg_file = await interaction.followup.send(view=self.view, ephemeral=True)
+        # with open('database/products.json', 'rb') as file:
+        #     try:
+        #         self.msg_file = await interaction.followup.send(file=discord.File(file), view=self.view, ephemeral=True)
+        #     except FileNotFoundError:
+        #         await interaction.followup.send("Arquivo não encontrado.")
+                
+       
 class Estoque(commands.Cog):
     def __init__(self, client):
         self.client = client

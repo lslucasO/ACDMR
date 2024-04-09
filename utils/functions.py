@@ -125,10 +125,7 @@ def updateStock():
     else:
         salesList.append(sales.copy())
         saveDatabase(path="database/sales.json", sales=salesList)
-    
-    
-    
- 
+     
     
 def getSales():
     
