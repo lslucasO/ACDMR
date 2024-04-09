@@ -1,7 +1,5 @@
-import discord, os, asyncio, random, datetime
-import requests, bs4, json
-from bs4 import BeautifulSoup
-from time import sleep
+import discord, os, asyncio
+import requests, json
 from discord.ext import commands
 
 
