@@ -16,11 +16,11 @@ def createEmbed(embed_title, embed_field_name_list, embed_field_value_list, numb
 
 def createSalesEmbed(embed_title, embed_field_name_list, embed_field_value_list, number_of_fields, embed_image_url=None):
     embed = discord.Embed(title=f"{embed_title}", color=discord.Color.blurple())
-    embed.set_thumbnail(url=embed_image_url)
+    
     embed.add_field(name=f"{embed_field_name_list[0]}", value="",inline=False)
     
     for field in range(number_of_fields):   
-        embed.add_field(name=f"{field+1}", value=f"```📦 Produto: {embed_field_value_list[field]['product']}\n💲 Vendas: {embed_field_value_list[field]['sale']} Unidades```", inline=False)
+        embed.add_field(name=f"{field+1}", value=f"```📦 Produto: {embed_field_value_list[field]['product']}\n🏷️ Código: {embed_field_value_list[field]['code']}\n💲 Vendas: {embed_field_value_list[field]['sales']} Unidades```", inline=False)
         
 
     return embed  
@@ -63,7 +63,8 @@ def saveDatabase(path, sales=None, product=None):
     elif sales:
         for sale in sales:
             database["product"] = sale["product"]
-            database["sale"] = sale["sales"]
+            database["code"] = sale["code"]
+            database["sales"] = sale["sales"]
         
     
     with open(f"{path}", "r", encoding="utf-8") as f:
@@ -146,10 +147,9 @@ def updateStock():
             current_product[2] = current_stock
             
             sales["product"] = product["product"]
+            sales["code"] = product["code"]
             sales["sales"] = sale
-            print(sale)
-            
-           
+                 
         else:
             pass
         
@@ -185,7 +185,7 @@ def getSales():
 
 # print(len(getSales()))
 # updateStock()
-# updateStock()
+updateStock()
 # print(getSales())
 
 listSales = getSales()
