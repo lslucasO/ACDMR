@@ -7,10 +7,21 @@ from discord import app_commands
 def createEmbed(embed_title, embed_field_name_list, embed_field_value_list, number_of_fields, embed_image_url=None):
     embed = discord.Embed(title=f"{embed_title}", color=discord.Color.blurple())
     embed.set_thumbnail(url=embed_image_url)
-    
     for field in range(number_of_fields):   
         print(field)
         embed.add_field(name=f"{embed_field_name_list[field]}", value=f"{embed_field_value_list[field]}", inline=False)
+
+    return embed  
+
+
+def createSalesEmbed(embed_title, embed_field_name_list, embed_field_value_list, number_of_fields, embed_image_url=None):
+    embed = discord.Embed(title=f"{embed_title}", color=discord.Color.blurple())
+    embed.set_thumbnail(url=embed_image_url)
+    embed.add_field(name=f"{embed_field_name_list[0]}", value="",inline=False)
+    
+    for field in range(number_of_fields):   
+        embed.add_field(name=f"{field+1}", value=f"```📦 Produto: {embed_field_value_list[field]['product']}\n💲 Vendas: {embed_field_value_list[field]['sale']} Unidades```", inline=False)
+        
 
     return embed  
 
@@ -177,9 +188,9 @@ def getSales():
 # updateStock()
 # print(getSales())
 
-# listSales = getSales()
+listSales = getSales()
+print(len(listSales))
+embed_image_url = "https://cdn.discordapp.com/attachments/842737517228982272/1224822590061674546/20-01.png?ex=661ee3ed&is=660c6eed&hm=af4b36c7e87cac7b9f359fd8a65feaa8242f04f055ddeb30ad06261c49a3b178&"
 
-# embed_image_url = "https://cdn.discordapp.com/attachments/842737517228982272/1224822590061674546/20-01.png?ex=661ee3ed&is=660c6eed&hm=af4b36c7e87cac7b9f359fd8a65feaa8242f04f055ddeb30ad06261c49a3b178&"
-
-# embed = createEmbed(embed_title="Relatório de Vendas", embed_image_url=embed_image_url, embed_field_name_list=[f"Você teve {len(listSales)} produtos vendidos"], embed_field_value_list=listSales, number_of_fields=len(listSales))
+embed = createSalesEmbed(embed_title="Relatório de Vendas", embed_image_url=embed_image_url, embed_field_name_list=[f""], embed_field_value_list=listSales, number_of_fields=len(listSales))
         
