@@ -32,8 +32,8 @@ def createProductEmbed(embed_title, embed_field_name_list, embed_field_value_lis
     embed.add_field(name=f"{embed_field_name_list[0]}", value="",inline=False)
     
     for field in range(number_of_value_fields): 
-        if int(embed_field_value_list[field]["stock"]) <= 50:   
-            embed.add_field(name=f"{field+1}. **{embed_field_value_list[field]['product']}**", value=f"Estoque: **{embed_field_value_list[field]['stock']}** Unidades ⚠️\n Código: **{embed_field_value_list[field]['code']}**", inline=False)
+        if int(embed_field_value_list[field]["stock"]) <= 100:   
+            embed.add_field(name=f"", value=f"```📦 Produto: {embed_field_value_list[field]['product']}\n🏷️ Código: {embed_field_value_list[field]['code']}\n🟢 Estoque: {embed_field_value_list[field]['stock']} Unidades ⚠️```", inline=False)
         
     return embed
 

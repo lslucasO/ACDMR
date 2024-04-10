@@ -45,7 +45,9 @@ class Buttons(discord.ui.View):
         self.url_list = []
         self.msg_list.append(self.quantity_product)
         
-        await interaction.followup.send(f"Coloca nesse formato: (url) (cor) (tamanho) (estoque)\n Cor, tamanho e estoque tu só coloca se o produto tiver algum desses atributos, se n tiver nada pode jogar só o link msm", ephemeral=True)
+        embed = createEmbed(embed_title=f"Formato", embed_field_name_list=[f"Como enviar a mensagem:", "Campos em Branco: "], embed_field_value_list=[f"```Envie a mensagem nesse formato:\nUrl, Cor, Tamanho, Estoque```", "```Os campos que não existirem no produto preencha com -> ''. Só preencha o campo **Estoque** se o produto tiver algum desses atributos.```"], number_of_fields=2)
+        
+        await interaction.followup.send(embed=embed, ephemeral=True)
         
         for self.index in range(int(self.quantity_product.content)):
             await interaction.followup.send(f"Manda o {self.index+1}* link", ephemeral=True)
@@ -90,7 +92,7 @@ class Buttons(discord.ui.View):
         
         listProducts = getStock()
 
-        embed = createProductEmbed(embed_title="📦 Seu Estoque", embed_image_url=embed_image_url, embed_field_name_list=[f"Você tem {len(listProducts)} produtos cadastrados, mas apenas serão exibidos os que possuem poucas unidades."], embed_field_value_list=listProducts, number_of_value_fields=len(listProducts))
+        embed = createProductEmbed(embed_title="📦 Seu Estoque", embed_image_url=embed_image_url, embed_field_name_list=[f"Você tem {len(listProducts)} produtos cadastrados"], embed_field_value_list=listProducts, number_of_value_fields=len(listProducts))
         
         self.view = Buttons(timeout=None)
         
@@ -125,7 +127,7 @@ class Buttons(discord.ui.View):
     
         await interaction.followup.send("Item removido com sucesso ✅", ephemeral=True)
         
-        embed = createProductEmbed(embed_title="📦 Seu Estoque", embed_image_url=embed_image_url, embed_field_name_list=[f"Você tem {len(self.listProducts)} produtos cadastrados, mas apenas serão exibidos os que possuem poucas unidades."], embed_field_value_list=self.listProducts, number_of_value_fields=len(self.listProducts))
+        embed = createProductEmbed(embed_title="📦 Seu Estoque", embed_image_url=embed_image_url, embed_field_name_list=[f"Você tem {len(self.listProducts)} produtos cadastrados"], embed_field_value_list=self.listProducts, number_of_value_fields=len(self.listProducts))
         
         self.view = Buttons(timeout=None)
         
