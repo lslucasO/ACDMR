@@ -27,9 +27,10 @@ class Cadastrar(discord.ui.View):
         for self.index in range(int(self.data[0])):
             await interaction.followup.send(f"Manda o {self.index+1}* link", ephemeral=True)
             self.message = await interaction.client.wait_for("message", timeout=60.0)
-            self.msg_list.append(self.message)
             
+            self.msg_list.append(self.message)
             self.message = self.message.content.split() 
+            
             self.url = self.message[0]
 
             if len(self.message) == 4:

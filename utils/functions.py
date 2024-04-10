@@ -133,7 +133,6 @@ def updateStock():
         
         current_product = getProduct(product["url"])
         new_stock = int(current_product[2])
-
         old_stock = int(product["stock"])
       
         if new_stock < old_stock:
@@ -175,7 +174,7 @@ def getSales():
 
 
 
-product_information = getProduct(url="https://www.gruposhopmix.com/tatuagem-para-braco-do-sleeve-manga-fake-tattoo-tatuagem")
+# product_information = getProduct(url="https://www.gruposhopmix.com/tatuagem-para-braco-do-sleeve-manga-fake-tattoo-tatuagem")
 # saveDatabase(path="database/products.json", product=product_information)
 # updateStock()
 # saveProduct(produto)
