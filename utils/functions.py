@@ -31,7 +31,7 @@ def saveDatabase(path, sales=None, product=None):
     
     database = {}
     listData = []
-    print(len(product))
+    
     if product:
         database["product"] = product[0]
         database["code"] = product[4]
@@ -39,12 +39,13 @@ def saveDatabase(path, sales=None, product=None):
         database["stock"] = product[2]
         
         if len(product) == 8:
-            database["color"] = product[6]
-            database["size"] = product[7]
+            database["color"] = product[6].strip()
+            database["size"] = product[7].strip()
         elif len(product) == 7:
             database["color"] = product[6]
         else:
-            pass
+            database["color"] = ""
+            database["size"] = ""
         
         database["image"] = product[3]
         database["url"] =product[5]
@@ -125,9 +126,7 @@ def updateStock():
 
         old_stock = int(product["stock"])
       
-        
         if new_stock < old_stock:
-            print("Oi")
             # Tivemos uma venda
             sale = old_stock - new_stock
             # Estoque atual
@@ -137,6 +136,7 @@ def updateStock():
             
             sales["product"] = product["product"]
             sales["sales"] = sale
+            print(sale)
             
            
         else:
@@ -167,8 +167,9 @@ def getSales():
 
 
 
-product_information = getProduct(url="https://www.gruposhopmix.com/mini-liquidificador-portatil-shake-suco-juice-cup-mixer-usb-300ml", color="Azul", size="N", stock=998)
-saveDatabase(path="database/products.json", product=product_information)
+# product_information = getProduct(url="https://www.gruposhopmix.com/joelheira-de-compressao-ortopedica-amortecedor-de-silicone", color="", size="XL", stock=13)
+# saveDatabase(path="database/products.json", product=product_information)
+# updateStock()
 # saveProduct(produto)
 
 # print(len(getSales()))
