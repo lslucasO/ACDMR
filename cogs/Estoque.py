@@ -43,21 +43,42 @@ class Buttons(discord.ui.View):
         self.quantity_product = await interaction.client.wait_for("message")
         self.msg_list = []
         self.url_list = []
-        
+        self.send_link = await interaction.followup.send(f"Coloca nesse formato: (url) (cor) (tamanho) (estoque)\n Cor, tamanho e estoque tu só coloca se o produto tiver algum desses atributos, se n tiver nada pode jogar só o link msm", ephemeral=True)
         self.msg_list.append(self.message_product)
         self.msg_list.append(self.quantity_product)
         
         for self.index in range(int(self.quantity_product.content)):
             self.send_link = await interaction.followup.send(f"Manda o {self.index+1}* link")
             self.await_product = await interaction.client.wait_for("message")
-            self.url = self.await_product.content
-            self.msg_list.append(self.await_product)
+            self.await_product = self.await_product.content.split()
+            
+            
+            self.url = self.await_product[0]
+            if len(self.await_product) == 4:
+                self.color = self.await_product[1]
+                self.size = self.await_product[2]
+                self.stock = self.await_product[3]
+                # Peguei o produto
+                self.product_information = getProduct(url=self.url, color=self.color, size=self.size, stock=self.stock)
+                # Salvando na database
+                saveDatabase(path="database/products.json", product=self.product_information)
+            elif len(self.await_product) == 3:
+                self.color = self.await_product[1]
+                self.size = self.await_product[2]
+                self.product_information = getProduct(url=self.url, color=self.color, size=self.size)
+                saveDatabase(path="database/products.json", product=self.product_information)
+            elif len(self.await_product) == 2:
+                self.color = self.await_product[1]
+                self.product_information = getProduct(url=self.url, color=self.color)
+                saveDatabase(path="database/products.json", product=self.product_information)
+            else:
+                self.product_information = getProduct(url=self.url)
+                saveDatabase(path="database/products.json", product=self.product_information)
+            
             self.msg_list.append(self.send_link)
             
-            # Peguei o produto
-            self.product_information = getProduct(self.url)
-            # Salvando na database
-            saveDatabase(path="database/products.json", product=self.product_information)
+       
+            self.msg_list.append(self.await_product)
             
             embed = createEmbed(embed_title=f"{self.product_information[0]}", embed_field_name_list=[f"Estoque:", f"Preço:"], embed_field_value_list=[f"{self.product_information[2]} Unidades", f"R${self.product_information[1]}"], number_of_fields=2, embed_image_url=f"{self.product_information[3]}")
             

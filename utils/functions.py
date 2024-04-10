@@ -31,12 +31,21 @@ def saveDatabase(path, sales=None, product=None):
     
     database = {}
     listData = []
-    
+    print(len(product))
     if product:
         database["product"] = product[0]
         database["code"] = product[4]
-        database["price"] = product[1].strip()
+        database["price"] = float(product[1])
         database["stock"] = product[2]
+        
+        if len(product) == 8:
+            database["color"] = product[6]
+            database["size"] = product[7]
+        elif len(product) == 7:
+            database["color"] = product[6]
+        else:
+            pass
+        
         database["image"] = product[3]
         database["url"] =product[5]
     elif sales:
@@ -60,20 +69,34 @@ def saveDatabase(path, sales=None, product=None):
         json.dump(listData, f, ensure_ascii=False, indent=3)
 
 
-def getProduct(url):
+def getProduct(url, color=None, size=None, stock=None):
     
     product_url = requests.get(url)
     doc = BeautifulSoup(product_url.text, "html.parser")
     
     product = doc.find("h1", class_="nome-produto titulo cor-secundaria").string
     price = doc.find("strong", class_="preco-promocional cor-principal titulo")
-    stock = doc.find("b", class_="qtde_estoque").string
+    if stock:
+        pass
+    else:   
+        stock = doc.find("b", class_="qtde_estoque").string
     image = doc.find("img", id="imagemProduto")
-    code = doc.find("span", itemprop="sku").string
+    code = doc.find("span", itemprop="sku").string 
     
     product_information = [product, price["data-sell-price"], stock, image["src"], code, url]
-        
+    
+    if color and size:
+        product_information.append(color)
+        product_information.append(size)
+    elif color:
+        product_information.append(color)
+    elif size:
+        product_information.append(size)
+    else:
+        pass
+    
     return product_information
+
 
 
 def getStock():
@@ -143,8 +166,9 @@ def getSales():
     return listSales
 
 
-         
-# produto = getProduct("https://www.gruposhopmix.com/tapete-antiderrapante-lava-pes-massageador-c-ventosas")
+
+product_information = getProduct(url="https://www.gruposhopmix.com/mini-liquidificador-portatil-shake-suco-juice-cup-mixer-usb-300ml", color="Azul", size="N", stock=998)
+saveDatabase(path="database/products.json", product=product_information)
 # saveProduct(produto)
 
 # print(len(getSales()))
