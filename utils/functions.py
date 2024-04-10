@@ -110,7 +110,6 @@ def getProduct(url, color=None, size=None, stock=None):
     return product_information
 
 
-
 def getStock():
     
     listProducts = []
@@ -147,8 +146,7 @@ def updateStock():
             
             sales["product"] = product["product"]
             sales["code"] = product["code"]
-            sales["sales"] = sale
-                 
+            sales["sales"] = sale 
         else:
             pass
         
@@ -177,7 +175,7 @@ def getSales():
 
 
 
-# product_information = getProduct(url="https://www.gruposhopmix.com/joelheira-de-compressao-ortopedica-amortecedor-de-silicone", color="", size="XL", stock=13)
+product_information = getProduct(url="https://www.gruposhopmix.com/tatuagem-para-braco-do-sleeve-manga-fake-tattoo-tatuagem")
 # saveDatabase(path="database/products.json", product=product_information)
 # updateStock()
 # saveProduct(produto)
