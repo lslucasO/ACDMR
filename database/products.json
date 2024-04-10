@@ -68,5 +68,35 @@
       "size": "\"\"",
       "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/227995510/1789-6n380tigdz.jpg",
       "url": "https://www.gruposhopmix.com/mini-barbeador-eletrico-portatil-recarregavel-aparador-de-pelos"
+   },
+   {
+      "product": "Cinta Modeladora Abdominal Unissex Waist Belt",
+      "code": "STO1065",
+      "price": 22.9,
+      "stock": "1",
+      "color": "",
+      "size": "",
+      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/138268139e484dfffe6.jpg",
+      "url": "https://www.gruposhopmix.com/produto/cinta-modeladora-abdominal-unisex-waist-belt.html"
+   },
+   {
+      "product": "Garrafa Térmica Esportiva A Vácuo 600ml Aço Inox Bico Canudo",
+      "code": "STO2117",
+      "price": 35.9,
+      "stock": "1000",
+      "color": "Bege",
+      "size": "''''",
+      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/26085977381de0ad73a.jpg",
+      "url": "https://www.gruposhopmix.com/garrafa-termica-esportiva-a-vacuo-600ml-aco-inox-bico-canudo"
+   },
+   {
+      "product": "Regata Cinta Modeladora Térmica Compressão Abdominal Masculina",
+      "code": "STO1205",
+      "price": 49.9,
+      "stock": "1000",
+      "color": "\"",
+      "size": "M",
+      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/157917069/384d925f63.jpg",
+      "url": "https://www.gruposhopmix.com/regata-cinta-modeladora-termica-compressao-abdominal-masculina"
    }
 ]

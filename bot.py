@@ -10,7 +10,7 @@ client = commands.Bot(command_prefix="!", intents=discord.Intents.all())
 
 @client.event
 async def on_message(message):
-    if message.author.bot: 
+   if message.author == client.User:
         return
 
 @client.event

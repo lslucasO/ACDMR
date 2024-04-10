@@ -40,12 +40,13 @@ class Buttons(discord.ui.View):
         await interaction.response.defer(ephemeral=True)
         
         await interaction.followup.send("Digite quantos produtos você deseja adicionar", ephemeral=True)
-        self.quantity_product = await interaction.client.wait_for("message")
+        
+        self.quantity_product = await interaction.client.wait_for("message", timeout=30)
         self.msg_list = []
         self.url_list = []
         self.msg_list.append(self.quantity_product)
         
-        embed = createEmbed(embed_title=f"Formato", embed_field_name_list=[f"Como enviar a mensagem:", "Campos em Branco: "], embed_field_value_list=[f"```Envie a mensagem nesse formato:\nUrl, Cor, Tamanho, Estoque```", "```Os campos que não existirem no produto preencha com -> ''. Só preencha o campo **Estoque** se o produto tiver algum desses atributos.```"], number_of_fields=2)
+        embed = createEmbed(embed_title=f"Formato", embed_field_name_list=[f"Como enviar a mensagem:", "Campos em Branco: "], embed_field_value_list=[f"```Envie a mensagem nesse formato:\nUrl Cor Tamanho Estoque```", "```Os campos que não existirem no produto preencha com -> ''. Só preencha o campo **Estoque** se o produto tiver algum desses atributos.```"], number_of_fields=2)
         
         await interaction.followup.send(embed=embed, ephemeral=True)
         
