@@ -1,55 +1,5 @@
 [
    {
-      "product": "Espremedor Amassador de Limão Laranja em Aço Inox",
-      "code": "STO1058",
-      "price": 16.9,
-      "stock": "994",
-      "color": "",
-      "size": "",
-      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/136058035a9881c60c6.jpg",
-      "url": "https://www.gruposhopmix.com/produto/espremedor-amassador-de-limao-laranja-em-aco-inox.html"
-   },
-   {
-      "product": "Chinelo Ortopédico Unissex Super Macio E Antiderrapante",
-      "code": "STO973",
-      "price": 17.9,
-      "stock": "83",
-      "color": "Amarelo",
-      "size": "36/37",
-      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/189652784/21212-6llc1gv5dc.jpg",
-      "url": "https://www.gruposhopmix.com/chinelo-ortopedico-unissex-super-macio-e-antiderrapante"
-   },
-   {
-      "product": "Mini Liquidificador Portátil Shake Suco Juice Cup Mixer USB 300ml",
-      "code": "STO1547",
-      "price": 44.9,
-      "stock": "1003",
-      "color": "",
-      "size": "",
-      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/192196339/d38914b7d7.jpg",
-      "url": "https://www.gruposhopmix.com/mini-liquidificador-portatil-shake-suco-juice-cup-mixer-usb-300ml"
-   },
-   {
-      "product": "Cortador Triturador Elétrico Multifuncional Para Vegetais E Carnes Aço Inoxidável",
-      "code": "STO1448",
-      "price": 49.9,
-      "stock": "997",
-      "color": "",
-      "size": "",
-      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/180911009/54ca1f8e78.jpg",
-      "url": "https://www.gruposhopmix.com/cortador-triturador-eletrico-multifuncional-para-vegetais-e-carnes-aco-inoxidavel"
-   },
-   {
-      "product": "Rolo Bobina Saco Embalagem Seladora A Vacuo Ranhuras 30 Cm",
-      "code": "STO445CM30",
-      "price": 39.9,
-      "stock": "1000",
-      "color": "",
-      "size": "",
-      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/13296899701cacb221a.jpg",
-      "url": "https://www.gruposhopmix.com/produto/rolo-bobina-saco-embalagem-seladora-a-vacuo-ranhuras-30-cm.html"
-   },
-   {
       "product": "Seladora A Vácuo Embaladora Alimentos Bivolt",
       "code": "STO1039",
       "price": 129.9,
