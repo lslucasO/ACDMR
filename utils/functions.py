@@ -48,17 +48,30 @@ def saveDatabase(path, sales=None, product=None):
         database["price"] = float(product[1])
         database["stock"] = product[2]
         
-        if len(product) == 8:
+        # color -> 6 len 7
+        # size -> 7 len 8
+        # pos -> 8 len 9
+        
+        print(len(product))
+        if len(product) == 9:
             database["color"] = product[6].strip()
             database["size"] = product[7].strip()
+            database["pos"] = product[8]
+        elif len(product) == 8:
+            database["color"] = product[6].strip()
+            database["pos"] = product[7]
         elif len(product) == 7:
-            database["color"] = product[6]
+            database["size"] = product[6]
+            database["pos"] = product[7]
         else:
             database["color"] = ""
             database["size"] = ""
-        
+            database["pos"] = ""
+            
         database["image"] = product[3]
         database["url"] =product[5]
+        
+        
     elif sales:
         for sale in sales:
             database["product"] = sale["product"]
@@ -88,24 +101,47 @@ def getProduct(url, color=None, size=None, stock=None):
     
     product = doc.find("h1", class_="nome-produto titulo cor-secundaria").string
     price = doc.find("strong", class_="preco-promocional cor-principal titulo")
+    
     if stock:
-        pass
+        index = 1
+        new_stock = doc.find_all("b", class_="qtde_estoque")
+            
+        for item in new_stock:
+            item = item.string
+            # Achei o produto com o estoque especifico
+            if int(item) == stock:
+                print(f"achei na {index}* pos -> {item}")
+                stock = int(item)
+                pos = index
+                break
+            else:
+                pass
+                
+            index += 1
     else:   
         stock = doc.find("b", class_="qtde_estoque").string
+       
     image = doc.find("img", id="imagemProduto")
     code = doc.find("span", itemprop="sku").string 
     
-    product_information = [product, price["data-sell-price"], stock, image["src"], code, url]
+    product_information = [product, price["data-sell-price"], int(stock), image["src"], code, url]
     
+
     if color and size:
         product_information.append(color)
         product_information.append(size)
+        product_information.append(pos)
     elif color:
         product_information.append(color)
+        product_information.append(pos)
     elif size:
         product_information.append(size)
+        product_information.append(pos)
     else:
         pass
+    
+    
+    print(product_information)
     
     return product_information
 
@@ -131,7 +167,7 @@ def updateStock():
     
     for product in listProducts:
         
-        current_product = getProduct(product["url"])
+        current_product = getProduct(url=product["url"])
         new_stock = int(current_product[2])
         old_stock = int(product["stock"])
       
@@ -174,8 +210,10 @@ def getSales():
 
 
 
-# product_information = getProduct(url="https://www.gruposhopmix.com/tatuagem-para-braco-do-sleeve-manga-fake-tattoo-tatuagem")
-# saveDatabase(path="database/products.json", product=product_information)
+product_information = getProduct(url="https://www.gruposhopmix.com/mangueira-jardim-expansivel-15-metros-resistente-jatos-d-agua", color="Verde", stock=997)
+product_information = getProduct(url="https://www.gruposhopmix.com/camisa-de-algodao-gruposhopmix-azul-logo-dourada", color="Azul-escuro", size="G", stock=1001)
+product_information = getProduct(url="https://www.gruposhopmix.com/mangueira-jardim-expansivel-15-metros-resistente-jatos-d-agua")
+saveDatabase(path="database/products.json", product=product_information)
 # updateStock()
 # saveProduct(produto)
 

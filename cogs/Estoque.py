@@ -4,6 +4,7 @@ from utils.functions import createEmbed, createProductEmbed, createSalesEmbed, g
 from discord.ext import commands
 from discord import app_commands
 
+
 class Cadastrar(discord.ui.View):
 
     @discord.ui.select(
