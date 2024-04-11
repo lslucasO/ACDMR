@@ -54,8 +54,7 @@ def saveDatabase(path, sales=None, product=None):
         # color -> 6 len 7
         # size -> 7 len 8
         # pos -> 8 len 9
-        
-        print(len(product))
+    
         if len(product) == 9:
             database["color"] = product[6].strip()
             database["size"] = product[7].strip()
@@ -87,7 +86,9 @@ def saveDatabase(path, sales=None, product=None):
         data = json.load(f)  
         
         for produto in data:
-            if database["product"] in produto["product"]:
+            if database["product"] in produto["product"] and database["color"] in produto["color"]:
+                pass
+            elif database["product"] in produto["product"] and database["size"] in produto["size"]:
                 pass
             else:
                 listData.append(produto)
@@ -222,10 +223,10 @@ def getSales():
 
 
 
-# product_information = getProduct(url="https://www.gruposhopmix.com/mangueira-jardim-expansivel-15-metros-resistente-jatos-d-agua", color="Verde", stock=997)
-# product_information = getProduct(url="https://www.gruposhopmix.com/camisa-de-algodao-gruposhopmix-azul-logo-dourada", color="Azul-escuro", size="G", stock=1001)
-# product_information = getProduct(url="https://www.gruposhopmix.com/camisa-brasil-copa-do-mundo-torcedor-futebol", size="M", stock=6)
-# product_information = getProduct(url="https://www.gruposhopmix.com/moedor-de-carne-frango-profissional-eletrica-maquina-de-moer")
+# product_information = getProduct(url="https://www.gruposhopmix.com/chinelo-ortopedico-unissex-super-macio-e-antiderrapante", color="Preto", size="34/35", stock=48)
+# # product_information = getProduct(url="https://www.gruposhopmix.com/camisa-de-algodao-gruposhopmix-azul-logo-dourada", color="Azul-escuro", size="G", stock=1001)
+# # product_information = getProduct(url="https://www.gruposhopmix.com/camisa-brasil-copa-do-mundo-torcedor-futebol", size="M", stock=6)
+# # product_information = getProduct(url="https://www.gruposhopmix.com/moedor-de-carne-frango-profissional-eletrica-maquina-de-moer")
 # saveDatabase(path="database/products.json", product=product_information)
 # updateStock()
 # saveProduct(produto)

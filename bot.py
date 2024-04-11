@@ -5,7 +5,7 @@ from utils.functions import createEmbed
 
 intents = discord.Intents.default()
 intents.message_content = True 
-client = commands.Bot(command_prefix="!", intents=discord.Intents.all())
+client = commands.Bot(command_prefix="!", intents=discord.Intents.all())        
 
 @client.event
 async def on_ready():

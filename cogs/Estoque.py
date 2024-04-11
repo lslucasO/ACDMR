@@ -26,29 +26,31 @@ class Cadastrar(discord.ui.View):
         self.url_list = []
         
         for self.index in range(int(self.data[0])):
+            print(f"{interaction.user.name} Está cadastrando um produto")
             await interaction.followup.send(f"Manda o {self.index+1}* link", ephemeral=True)
-            self.message = await interaction.client.wait_for("message", timeout=60.0)
+   
+            message = await interaction.client.wait_for("message", timeout=60.0)
+            self.msg_list.append(message)
             
-            self.msg_list.append(self.message)
-            self.message = self.message.content.split() 
+            message = message.content.split() 
             
-            self.url = self.message[0]
-
-            if len(self.message) == 4:
-                self.color = self.message[1]
-                self.size = self.message[2]
-                self.stock = self.message[3]
+            self.url = message[0]   
+        
+            if len(message) == 4:
+                self.color = message[1]
+                self.size = message[2]
+                self.stock = message[3]
                 # Peguei o produto
                 self.product_information = getProduct(url=self.url, color=self.color, size=self.size, stock=self.stock)
                 # Salvando na database
                 saveDatabase(path="database/products.json", product=self.product_information)
-            elif len(self.message) == 3:
-                self.color = self.message[1]
-                self.size = self.message[2]
+            elif len(message) == 3:
+                self.color = message[1]
+                self.size = message[2]
                 self.product_information = getProduct(url=self.url, color=self.color, size=self.size)
                 saveDatabase(path="database/products.json", product=self.product_information)
-            elif len(self.message) == 2:
-                self.color = self.message[1]
+            elif len(message) == 2:
+                self.color = message[1]
                 self.product_information = getProduct(url=self.url, color=self.color)
                 saveDatabase(path="database/products.json", product=self.product_information)
             else:
