@@ -58,11 +58,12 @@ def saveDatabase(path, sales=None, product=None):
             database["size"] = product[7].strip()
             database["pos"] = product[8]
         elif len(product) == 8:
-            database["color"] = product[6].strip()
+            if len(product[6]) <= 3:
+                database["size"] = product[6].strip()
+            else:
+                database["color"] = product[6].strip()
             database["pos"] = product[7]
-        elif len(product) == 7:
-            database["size"] = product[6]
-            database["pos"] = product[7]
+
         else:
             database["color"] = ""
             database["size"] = ""
@@ -210,9 +211,9 @@ def getSales():
 
 
 
-product_information = getProduct(url="https://www.gruposhopmix.com/mangueira-jardim-expansivel-15-metros-resistente-jatos-d-agua", color="Verde", stock=997)
+# product_information = getProduct(url="https://www.gruposhopmix.com/mangueira-jardim-expansivel-15-metros-resistente-jatos-d-agua", color="Verde", stock=997)
 product_information = getProduct(url="https://www.gruposhopmix.com/camisa-de-algodao-gruposhopmix-azul-logo-dourada", color="Azul-escuro", size="G", stock=1001)
-product_information = getProduct(url="https://www.gruposhopmix.com/mangueira-jardim-expansivel-15-metros-resistente-jatos-d-agua")
+# product_information = getProduct(url="https://www.gruposhopmix.com/camisa-brasil-copa-do-mundo-torcedor-futebol", size="M", stock=6)
 saveDatabase(path="database/products.json", product=product_information)
 # updateStock()
 # saveProduct(produto)

@@ -1,5 +1,25 @@
 [
    {
+      "product": "Camisa Brasil Copa do Mundo Torcedor Futebol",
+      "code": "STO1441",
+      "price": 19.9,
+      "stock": 6,
+      "size": "M",
+      "pos": 3,
+      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/180269680/ff176f9d87.jpg",
+      "url": "https://www.gruposhopmix.com/camisa-brasil-copa-do-mundo-torcedor-futebol"
+   },
+   {
+      "product": "Mangueira Jardim Expansível 15 Metros Resistente Jatos D Água",
+      "code": "STO2019",
+      "price": 29.9,
+      "stock": 997,
+      "color": "Verde",
+      "pos": 1,
+      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/2488697707b25b8c25b.jpg",
+      "url": "https://www.gruposhopmix.com/mangueira-jardim-expansivel-15-metros-resistente-jatos-d-agua"
+   },
+   {
       "product": "Camisa De Algodão Parceiro GrupoShopMix Azul Logo Dourada",
       "code": "STO1521",
       "price": 39.9,
@@ -9,16 +29,5 @@
       "pos": 1,
       "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/188432022/05b9f90b67.jpg",
       "url": "https://www.gruposhopmix.com/camisa-de-algodao-gruposhopmix-azul-logo-dourada"
-   },
-   {
-      "product": "Mangueira Jardim Expansível 15 Metros Resistente Jatos D Água",
-      "code": "STO2019",
-      "price": 29.9,
-      "stock": 997,
-      "color": "",
-      "size": "",
-      "pos": "",
-      "image": "https://cdn.awsli.com.br/600x450/1080/1080773/produto/2488697707b25b8c25b.jpg",
-      "url": "https://www.gruposhopmix.com/mangueira-jardim-expansivel-15-metros-resistente-jatos-d-agua"
    }
 ]
