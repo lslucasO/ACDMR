@@ -95,7 +95,7 @@ def saveDatabase(path, sales=None, product=None):
         json.dump(listData, f, ensure_ascii=False, indent=3)
 
 
-def getProduct(url, color=None, size=None, stock=None):
+def getProduct(url, color=None, size=None, stock=None, pos=None):
     
     product_url = requests.get(url)
     doc = BeautifulSoup(product_url.text, "html.parser")
@@ -108,17 +108,18 @@ def getProduct(url, color=None, size=None, stock=None):
         new_stock = doc.find_all("b", class_="qtde_estoque")
             
         for item in new_stock:
+            #print(index)
             item = item.string
             # Achei o produto com o estoque especifico
-            if int(item) == stock:
-                print(f"achei na {index}* pos -> {item}")
+            if index == pos:
+                #print(f"achei na {pos}* pos -> {item}")
                 stock = int(item)
-                pos = index
                 break
             else:
                 pass
-                
             index += 1
+            
+
     else:   
         stock = doc.find("b", class_="qtde_estoque").string
        
@@ -131,18 +132,18 @@ def getProduct(url, color=None, size=None, stock=None):
     if color and size:
         product_information.append(color)
         product_information.append(size)
-        product_information.append(pos)
+        product_information.append(index)
     elif color:
         product_information.append(color)
-        product_information.append(pos)
+        product_information.append(index)
     elif size:
         product_information.append(size)
-        product_information.append(pos)
+        product_information.append(index)
     else:
         pass
     
     
-    print(product_information)
+    #print(product_information)
     
     return product_information
 
@@ -167,10 +168,17 @@ def updateStock():
     salesList = []
     
     for product in listProducts:
-        
-        current_product = getProduct(url=product["url"])
-        new_stock = int(current_product[2])
-        old_stock = int(product["stock"])
+        # Requisitar novamente ao site
+        if product["pos"] == "":
+             current_product = getProduct(url=product["url"])
+        else:
+             current_product = getProduct(url=product["url"], stock=product["stock"], pos=product["pos"])
+   
+       
+        # Estoque novo
+        new_stock = current_product[2]
+        # Antigo Estoque
+        old_stock = product["stock"]
       
         if new_stock < old_stock:
             # Tivemos uma venda
@@ -212,9 +220,10 @@ def getSales():
 
 
 # product_information = getProduct(url="https://www.gruposhopmix.com/mangueira-jardim-expansivel-15-metros-resistente-jatos-d-agua", color="Verde", stock=997)
-product_information = getProduct(url="https://www.gruposhopmix.com/camisa-de-algodao-gruposhopmix-azul-logo-dourada", color="Azul-escuro", size="G", stock=1001)
+# product_information = getProduct(url="https://www.gruposhopmix.com/camisa-de-algodao-gruposhopmix-azul-logo-dourada", color="Azul-escuro", size="G", stock=1001)
 # product_information = getProduct(url="https://www.gruposhopmix.com/camisa-brasil-copa-do-mundo-torcedor-futebol", size="M", stock=6)
-saveDatabase(path="database/products.json", product=product_information)
+# product_information = getProduct(url="https://www.gruposhopmix.com/moedor-de-carne-frango-profissional-eletrica-maquina-de-moer")
+# saveDatabase(path="database/products.json", product=product_information)
 # updateStock()
 # saveProduct(produto)
 
