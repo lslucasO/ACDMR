@@ -18,8 +18,11 @@ def createSalesEmbed(embed_title, embed_field_name_list, embed_field_value_list,
     
     embed.add_field(name=f"{embed_field_name_list[0]}", value="",inline=False)
     
-    for field in range(number_of_fields):   
-        embed.add_field(name=f"{field+1}", value=f"```📦 Produto: {embed_field_value_list[field]['product']}\n🏷️ Código: {embed_field_value_list[field]['code']}\n💲 Vendas: {embed_field_value_list[field]['sales']} Unidades```", inline=False)
+    if embed_field_value_list[0] in "Nenhum produto foi vendido hoje ;(":
+        embed.add_field(name=f"", value=f"```{embed_field_value_list[0]}```",inline=False)
+    else:
+        for field in range(number_of_fields):
+            embed.add_field(name=f"{field+1}", value=f"```📦 Produto: {embed_field_value_list[field]['product']}\n🏷️ Código: {embed_field_value_list[field]['code']}\n💲 Vendas: {embed_field_value_list[field]['sales']} Unidades```", inline=False)
         
 
     return embed  
@@ -130,8 +133,8 @@ def getProduct(url, color=None, size=None, stock=None, pos=None):
     
 
     if color and size:
-        product_information.append(color)
-        product_information.append(size)
+        product_information.append(color.strip())
+        product_information.append(size.strip())
         product_information.append(index)
     elif color:
         product_information.append(color)
@@ -226,15 +229,15 @@ def getSales():
 # saveDatabase(path="database/products.json", product=product_information)
 # updateStock()
 # saveProduct(produto)
-
+# print(getSales())
 # print(len(getSales()))
 # updateStock()
 # updateStock()
 # print(getSales())
 
 # listSales = getSales()
-# print(len(listSales))
+# # print(len(listSales))
 # embed_image_url = "https://cdn.discordapp.com/attachments/842737517228982272/1224822590061674546/20-01.png?ex=661ee3ed&is=660c6eed&hm=af4b36c7e87cac7b9f359fd8a65feaa8242f04f055ddeb30ad06261c49a3b178&"
-
+# print(len(listSales))
 # embed = createSalesEmbed(embed_title="Relatório de Vendas", embed_image_url=embed_image_url, embed_field_name_list=[f""], embed_field_value_list=listSales, number_of_fields=len(listSales))
         
