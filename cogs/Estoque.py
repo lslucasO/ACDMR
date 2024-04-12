@@ -102,7 +102,9 @@ class Remover(discord.ui.View):
         
         for self.index in range(int(self.data[0])):
             await interaction.followup.send(f"Digite o {self.index+1}* código do produto que deseja remover", ephemeral=True)
-            self.remove_product = await interaction.client.wait_for("message", timeout=60.0)
+            
+            if interaction.client.is_ready():
+                self.remove_product = await interaction.client.wait_for("message")
         
             for self.product in self.listProducts:
                 

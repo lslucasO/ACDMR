@@ -130,7 +130,6 @@ def getProduct(url, color=None, size=None, stock=None, pos=None):
     code = doc.find("span", itemprop="sku").string 
     
     if stock != None:
-        stock = stock.string
         product_information = [product, price["data-sell-price"], int(stock), image["src"], code, url]
     else:
         stock = 0
@@ -229,9 +228,9 @@ def getSales():
 
 
 # product_information = getProduct(url="https://www.gruposhopmix.com/mini-ventilador-usb-portatil-de-mesa-silencioso-articulavel")
-# # product_information = getProduct(url="https://www.gruposhopmix.com/camisa-de-algodao-gruposhopmix-azul-logo-dourada", color="Azul-escuro", size="G", stock=1001)
-# # product_information = getProduct(url="https://www.gruposhopmix.com/camisa-brasil-copa-do-mundo-torcedor-futebol", size="M", stock=6)
-# # product_information = getProduct(url="https://www.gruposhopmix.com/moedor-de-carne-frango-profissional-eletrica-maquina-de-moer")
+# # # product_information = getProduct(url="https://www.gruposhopmix.com/camisa-de-algodao-gruposhopmix-azul-logo-dourada", color="Azul-escuro", size="G", stock=1001)
+# # # product_information = getProduct(url="https://www.gruposhopmix.com/camisa-brasil-copa-do-mundo-torcedor-futebol", size="M", stock=6)
+# # # product_information = getProduct(url="https://www.gruposhopmix.com/moedor-de-carne-frango-profissional-eletrica-maquina-de-moer")
 # saveDatabase(path="database/products.json", product=product_information)
 # updateStock()
 # saveProduct(produto)
