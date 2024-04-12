@@ -26,12 +26,10 @@ class Cadastrar(discord.ui.View):
         self.url_list = []
         
         for self.index in range(int(self.data[0])):
-            print(f"{interaction.user.name} Está cadastrando um produto")
-            await interaction.followup.send(f"Manda o {self.index+1}* link", ephemeral=True)
-   
-            message = await interaction.client.wait_for("message", timeout=60.0)
-            self.msg_list.append(message)
-            
+            await interaction.followup.send(f"Manda o {self.index+1}* link")
+            # Problema 
+            if interaction.client.is_ready():
+                message = await interaction.client.wait_for("message")
             message = message.content.split() 
             
             self.url = message[0]   
@@ -57,13 +55,14 @@ class Cadastrar(discord.ui.View):
                 self.product_information = getProduct(url=self.url)
                 saveDatabase(path="database/products.json", product=self.product_information)
         
-       
+            print(f"{interaction.user.name} Cadastrou um produto com sucesso !")
             
             embed = createEmbed(embed_title=f"{self.product_information[0]}", embed_field_name_list=[f"Estoque:", f"Preço:"], embed_field_value_list=[f"{self.product_information[2]} Unidades", f"R${self.product_information[1]}"], number_of_fields=2, embed_image_url=f"{self.product_information[3]}")
             
             await interaction.followup.send(embed=embed, ephemeral=True)
         
-        await interaction.followup.send("Produto **adicionado** com sucesso", ephemeral=True)
+        
+        await interaction.followup.send("Produto(s) **adicionado(s)** com sucesso!", ephemeral=True)
         
         
         embed_image_url = "https://cdn.discordapp.com/attachments/842737517228982272/1224822590061674546/20-01.png?ex=661ee3ed&is=660c6eed&hm=af4b36c7e87cac7b9f359fd8a65feaa8242f04f055ddeb30ad06261c49a3b178&"

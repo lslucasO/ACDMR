@@ -122,15 +122,21 @@ def getProduct(url, color=None, size=None, stock=None, pos=None):
             else:
                 pass
             index += 1
-            
-
     else:   
-        stock = doc.find("b", class_="qtde_estoque").string
+        stock = doc.find("b", class_="qtde_estoque")
+        
        
     image = doc.find("img", id="imagemProduto")
     code = doc.find("span", itemprop="sku").string 
     
-    product_information = [product, price["data-sell-price"], int(stock), image["src"], code, url]
+    if stock != None:
+        stock = stock.string
+        product_information = [product, price["data-sell-price"], int(stock), image["src"], code, url]
+    else:
+        stock = 0
+        product_information = [product, price["data-sell-price"], stock, image["src"], code, url]
+        pass
+
     
 
     if color and size:
@@ -178,7 +184,6 @@ def updateStock():
         else:
              current_product = getProduct(url=product["url"], stock=product["stock"], pos=product["pos"])
    
-       
         # Estoque novo
         new_stock = current_product[2]
         # Antigo Estoque
@@ -223,7 +228,7 @@ def getSales():
 
 
 
-# product_information = getProduct(url="https://www.gruposhopmix.com/chinelo-ortopedico-unissex-super-macio-e-antiderrapante", color="Preto", size="34/35", stock=48)
+# product_information = getProduct(url="https://www.gruposhopmix.com/mini-ventilador-usb-portatil-de-mesa-silencioso-articulavel")
 # # product_information = getProduct(url="https://www.gruposhopmix.com/camisa-de-algodao-gruposhopmix-azul-logo-dourada", color="Azul-escuro", size="G", stock=1001)
 # # product_information = getProduct(url="https://www.gruposhopmix.com/camisa-brasil-copa-do-mundo-torcedor-futebol", size="M", stock=6)
 # # product_information = getProduct(url="https://www.gruposhopmix.com/moedor-de-carne-frango-profissional-eletrica-maquina-de-moer")
