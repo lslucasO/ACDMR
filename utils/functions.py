@@ -18,12 +18,12 @@ def createSalesEmbed(embed_title, embed_field_name_list, embed_field_value_list,
     
     embed.add_field(name=f"{embed_field_name_list[0]}", value="",inline=False)
     
-    if embed_field_value_list[0] in "Nenhum produto foi vendido hoje ;(":
+    if embed_field_value_list[0] == "Nenhum produto foi vendido ;(":
         embed.add_field(name=f"", value=f"```{embed_field_value_list[0]}```",inline=False)
     else:
         for field in range(number_of_fields):
-            embed.add_field(name=f"{field+1}", value=f"```📦 Produto: {embed_field_value_list[field]['product']}\n🏷️ Código: {embed_field_value_list[field]['code']}\n💲 Vendas: {embed_field_value_list[field]['sales']} Unidades```", inline=False)
-        
+            embed.add_field(name=f"{field+1}", value=f"```📦 Produto: {embed_field_value_list[field]['product']}\n🏷️ Código: {embed_field_value_list[field]['code']}\n🟠 Cor: {embed_field_value_list[field]['color']}\n📏 Tamanho: {embed_field_value_list[field]['size']}\n💲 Vendas: {embed_field_value_list[field]['sales']} Unidades```", inline=False)
+            
 
     return embed  
 
@@ -40,11 +40,11 @@ def createProductEmbed(embed_title, embed_field_name_list, embed_field_value_lis
     return embed
 
 
-def saveDatabase(path, sales=None, product=None):
+def saveDatabase(path, method=None, sales=None, product=None):
     
     database = {}
     listData = []
-    
+
     if product:
         database["product"] = product[0]
         database["code"] = product[4]
@@ -74,27 +74,51 @@ def saveDatabase(path, sales=None, product=None):
         database["image"] = product[3]
         database["url"] =product[5]
         
+        with open(f"{path}", "r", encoding="utf-8") as f:
+            data = json.load(f)  
+            
+            for produto in data:
+                if database["product"] in produto["product"] and database["color"] not in produto["color"]:
+                    
+                    # Mesmo produto, cor diferente
+                    
+                    listData.append(produto)
+                elif database["product"] in produto["product"] and database["color"] in produto["color"] and database["size"] not in produto["size"]:
+                    # Mesmo produto, cor igual, tamanho diferente
+                    
+                    listData.append(produto)
+                elif database["product"] in produto["product"] and database["size"] in produto["size"] and database["color"] not in produto["color"]:
+            
+                    # Mesmo produto, tamanho igual, cor diferente
+                    
+                    listData.append(produto)
+                elif database["product"] in produto["product"]:
+                    pass
+                else:
+                    listData.append(produto)
+            
+            listData.append(database.copy())
         
     elif sales:
+        listData = []
+        listProducts = []
+        found = False
+        new = False
+        i = 0
+        duplicata = 0
+        lenData = 0
+            
         for sale in sales:
+        
             database["product"] = sale["product"]
             database["code"] = sale["code"]
-            database["sales"] = sale["sales"]
-        
-    
-    with open(f"{path}", "r", encoding="utf-8") as f:
-        data = json.load(f)  
-        
-        for produto in data:
-            if database["product"] in produto["product"] and database["color"] in produto["color"]:
-                pass
-            elif database["product"] in produto["product"] and database["size"] in produto["size"]:
-                pass
-            else:
-                listData.append(produto)
-
-        listData.append(database.copy())
-     
+            database["color"] = sale["color"]
+            database["size"] = sale["size"]
+            database["sales"] = sale["sales"]  
+            
+            listData.append(database.copy()) 
+            
+            
     with open(f"{path}", "w", encoding="utf-8") as f:
         json.dump(listData, f, ensure_ascii=False, indent=3)
 
@@ -106,37 +130,42 @@ def getProduct(url, color=None, size=None, stock=None, pos=None):
     
     product = doc.find("h1", class_="nome-produto titulo cor-secundaria").string
     price = doc.find("strong", class_="preco-promocional cor-principal titulo")
+    found = False
     
     if stock:
         index = 1
+        
         new_stock = doc.find_all("b", class_="qtde_estoque")
-            
+        
         for item in new_stock:
             #print(index)
             item = item.string
             # Achei o produto com o estoque especifico
-            if index == pos:
-                #print(f"achei na {pos}* pos -> {item}")
+            if pos != None:
+                if index == pos:
+                    #print(f"achei na {pos}* pos -> {item}")
+                    found = True
+                    stock = int(item)
+                    break
+            elif stock == int(item) and pos == None:
+                found = True
                 stock = int(item)
                 break
             else:
                 pass
             index += 1
+        
     else:   
         stock = doc.find("b", class_="qtde_estoque")
+        if stock == None:
+            stock = 0
+        else:
+            stock = int(stock.string)
         
-       
     image = doc.find("img", id="imagemProduto")
     code = doc.find("span", itemprop="sku").string 
-    
-    if stock != None:
-        product_information = [product, price["data-sell-price"], int(stock), image["src"], code, url]
-    else:
-        stock = 0
-        product_information = [product, price["data-sell-price"], stock, image["src"], code, url]
-        pass
 
-    
+    product_information = [product, price["data-sell-price"], stock, image["src"], code, url]
 
     if color and size:
         product_information.append(color.strip())
@@ -152,7 +181,7 @@ def getProduct(url, color=None, size=None, stock=None, pos=None):
         pass
     
     
-    #print(product_information)
+    # print(product_information)
     
     return product_information
 
@@ -175,18 +204,19 @@ def updateStock():
     listProducts = getStock()
     sales = {}
     salesList = []
+
     
     for product in listProducts:
         # Requisitar novamente ao site
         if product["pos"] == "":
-             current_product = getProduct(url=product["url"])
+            current_product = getProduct(url=product["url"])
         else:
-             current_product = getProduct(url=product["url"], stock=product["stock"], pos=product["pos"])
-   
+            current_product = getProduct(url=product["url"], stock=product["stock"], pos=product["pos"], color=product["color"], size=product["size"])
+    
         # Estoque novo
-        new_stock = current_product[2]
+        new_stock = int(current_product[2])
         # Antigo Estoque
-        old_stock = product["stock"]
+        old_stock = int(product["stock"])
       
         if new_stock < old_stock:
             # Tivemos uma venda
@@ -198,17 +228,20 @@ def updateStock():
             
             sales["product"] = product["product"]
             sales["code"] = product["code"]
+            sales["color"] = product["color"]
+            sales["size"] = product["size"]
             sales["sales"] = sale 
-        else:
-            pass
+        
+            salesList.append(sales.copy())
+            
+        saveDatabase(path="database/products.json", product=current_product)
         
     
-    if len(sales) == 0:
-        pass
+    if len(salesList) == 0:
+        print("Nenhum produto vendido !")
     else:
-        salesList.append(sales.copy())
         saveDatabase(path="database/sales.json", sales=salesList)
-     
+        
     
 def getSales():
     
@@ -227,11 +260,30 @@ def getSales():
 
 
 
-# product_information = getProduct(url="https://www.gruposhopmix.com/mini-ventilador-usb-portatil-de-mesa-silencioso-articulavel")
-# # # product_information = getProduct(url="https://www.gruposhopmix.com/camisa-de-algodao-gruposhopmix-azul-logo-dourada", color="Azul-escuro", size="G", stock=1001)
-# # # product_information = getProduct(url="https://www.gruposhopmix.com/camisa-brasil-copa-do-mundo-torcedor-futebol", size="M", stock=6)
-# # # product_information = getProduct(url="https://www.gruposhopmix.com/moedor-de-carne-frango-profissional-eletrica-maquina-de-moer")
-# saveDatabase(path="database/products.json", product=product_information)
+# print(getSales())
+# updateStock()
+# for c in range(3): 
+#     pergunta = str(input("é comum? V/F: "))
+    
+#     if pergunta.upper() in "V":
+#         product_url = str(input("url: "))
+#         product_information = getProduct(url=product_url)
+#     else:
+#         product_url = str(input("url: "))
+#         product_color = str(input("cor: "))
+#         product_size = str(input("tamanho:"))
+#         product_stock = int(input("estoque: "))
+#         product_information = getProduct(url=product_url, color=product_color, size=product_size, stock=product_stock)
+        
+#     saveDatabase(path="database/products.json", product=product_information)
+#     print("Produto cadastrado com sucesso")
+    
+    
+# product_information = getProduct(url="https://www.gruposhopmix.com/produto/lanterna-led-de-cabeca-recarregavel-usb-resistente-agua.html")
+# # # print(product_information)
+# # product_information = getProduct(url="https://www.gruposhopmix.com/camisa-brasil-copa-do-mundo-torcedor-futebol", size="M", stock=6)
+# # # # # product_information = getProduct(url="https://www.gruposhopmix.com/moedor-de-carne-frango-profissional-eletrica-maquina-de-moer")
+
 # updateStock()
 # saveProduct(produto)
 # print(getSales())

@@ -3,6 +3,7 @@ from time import sleep
 from utils.functions import createEmbed, createProductEmbed, createSalesEmbed, getProduct, getSales, getStock, saveDatabase, updateStock
 from discord.ext import commands
 from discord import app_commands
+from datetime import datetime
 
 
 class Cadastrar(discord.ui.View):
@@ -183,10 +184,15 @@ class Buttons(discord.ui.View):
     @discord.ui.button(label="🔃 Atualizar Estoque",style=discord.ButtonStyle.blurple)
     async def atualizarEstoque(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.defer(ephemeral=True)
-
+        channel = interaction.client.get_channel(1230217244051505182)
         
+        today = datetime.now()
+        hours = f"{today.hour}:{today.minute}:{today.second}"
+        listStock = getStock()
+        
+        await interaction.followup.send(f"Estou analisando seus {len(listStock)} produtos, isso pode demorar um pouco...", ephemeral=True)
         updateStock()
-        await interaction.followup.send("Seu estoque foi atualizado com sucesso ✅", ephemeral=True)
+        await interaction.followup.send(f"Seu estoque foi atualizado com sucesso ✅ {channel.mention}", ephemeral=True)
         
         listSales = getSales() 
         
@@ -196,7 +202,8 @@ class Buttons(discord.ui.View):
         
         embed = createSalesEmbed(embed_title="Relatório de Vendas", embed_image_url=embed_image_url, embed_field_name_list=[""], embed_field_value_list=listSales, number_of_fields=len(listSales))
         
-        await interaction.followup.send(embed=embed, ephemeral=True)
+        await channel.send(embed=embed)
+        await channel.send(f"Relatório de Vendas gerado na data: {today.strftime('%d/%m/%Y')}\nHorário: {hours}")
 
 
     @discord.ui.button(label="💾 Arquivo",style=discord.ButtonStyle.gray)
